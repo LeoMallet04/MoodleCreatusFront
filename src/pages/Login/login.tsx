@@ -1,27 +1,30 @@
-import { Box, Input } from "@chakra-ui/react"
+import { Box, Flex, Input } from "@chakra-ui/react"
 import { Field } from "@/components/ui/field"
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/Logo.png"
 
 function Login(){
     return (
-        <Box display={"flex"} justifyContent={"center"} flexDirection={"column"} alignItems={"center"} margin={"185px"} gap={"30px"}>
-            {/* <img src="https://www.logolynx.com/images/logolynx/7f/7f4b7b3b1b1f1b1f1b1f1b1f1b1f1b1f.png" alt="logo" /> */}
+      <Box background={"white"} height={"100vh"} paddingTop={"185px"}>
+        <Flex justifyContent={"center"} flexDirection={"column"} alignItems={"center"}  gap={"30px"} >
+            <img src={Logo} alt="Logo"/>
             <Box>
-        <Field label="Email" color={"white"}>
-          <Input placeholder="me@example.com" width={"350px"}/>
+        <Field label="Email" color={"black"}>
+          <Input placeholder="me@example.com" width={"350px"} borderRadius={"40px"}/>
         </Field>
 
-        <Field label="Senha" color={"white"}>
-          <Input placeholder="" type="password" width={"350px"}/>
+        <Field label="Senha" color={"black"}>
+          <Input placeholder="Digite sua senha" type="password" width={"350px"} borderRadius={"40px"}/>
         </Field>
             </Box>
-            <Button background={"gray"} width={"400px"}>
+            <Button background={"#2E23A7"} width={"350px"} height= {"50px"} borderRadius={"45px"} fontSize={24} color={"white"}>
                 Entrar
             </Button>
             <Link to={"forgotPassword"}>
                 Esqueceu a senha?
             </Link>
+        </Flex>
         </Box>
       )
 }
