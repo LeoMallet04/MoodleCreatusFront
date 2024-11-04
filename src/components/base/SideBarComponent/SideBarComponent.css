@@ -1,0 +1,49 @@
+.sidebar {
+    width: 12vw;
+    min-height: 100vh;
+    background-color: white;
+    flex-direction: column;
+}
+
+.logo {
+    
+    width: 5rem;
+    height: 5rem;
+    margin-left: 2.5rem;
+    margin-top: 1rem;
+}
+
+.buttons {
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+
+.home {
+    flex-direction: row;
+    background-color: #665CEB;
+    border-radius: 45px;
+    min-height: 2.5rem;
+}
+
+.hometext {
+    color: black;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.faq {
+    flex-direction: row;
+    background-color: white;
+    border-radius: 45px;
+    min-height: 2.5rem;
+}
+
+.faqtext {
+    color: black;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}

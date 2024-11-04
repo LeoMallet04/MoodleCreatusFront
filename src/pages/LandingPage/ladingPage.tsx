@@ -1,7 +1,11 @@
+import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
+import './ladingPage.css';
 
 function LandingPage(){
     return(
-        <h1>Landing Page</h1>
+        <div className="page">
+            <SideBar></SideBar>
+        </div>
     )
 }
 
