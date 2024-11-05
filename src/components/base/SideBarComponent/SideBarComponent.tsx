@@ -27,7 +27,7 @@ function SideBar(){
 
     return (
         <Flex className="sidebar"
-              width={isOpen ? "11vw" : "4vw"}
+              width={isOpen ? "10.5vw" : "4vw"}
               transition="width 0.3s">
             
             <button className="toggle-button" onClick={toggleSidebar}>
@@ -39,19 +39,34 @@ function SideBar(){
                 <button className={`home ${isHomeActive ? 'active' : ''}`} onClick={goToHome}>
                     <Flex className="home-flex" align="center">
                         <RiHome6Line className='house-icon'/>
-                        {isOpen && <Text ml={1} className="hometext">Home</Text>}
+                        <Text
+                            ml={1}
+                            className={`hometext ${isOpen ? "fade-in" : "fade-out"}`}
+                        >
+                            Home
+                        </Text>
                     </Flex>
                 </button>
                 <button className="calendar">
                     <Flex className="calendar-flex" align="center">
                         <RiCalendarLine className='calendar-icon'/>
-                        {isOpen && <Text ml={1} className="calendartext">Calendário</Text>}
+                        <Text
+                            ml={1}
+                            className={`calendartext ${isOpen ? "fade-in" : "fade-out"}`}
+                        >
+                            Calendário
+                        </Text>
                     </Flex>
                 </button>
                 <button className="logout" onClick={goToLogin}>
                     <Flex className="logout-flex">
                         <RiLogoutBoxLine className='logout-icon'/>
-                        {isOpen && <Text ml={1} className="logouttext">Sair</Text>}
+                        <Text
+                            ml={1}
+                            className={`logouttext ${isOpen ? "fade-in" : "fade-out"}`}
+                        >
+                            Sair
+                        </Text>
                     </Flex>
                 </button>
             </Flex>

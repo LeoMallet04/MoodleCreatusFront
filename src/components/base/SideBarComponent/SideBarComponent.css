@@ -1,6 +1,6 @@
 .sidebar {
     min-height: 100vh;
-    background-color: white;
+    background-color: #0B2436;
     flex-direction: column;
 }
 
@@ -18,7 +18,7 @@
 .menu-icon {
     margin-left: 0.5rem;
     font-size: 1.5rem;
-    color: black;
+    color: white;
     min-width: 1.5rem;
 }
 
@@ -36,6 +36,7 @@
     min-height: 2.5rem;
     align-items: center;
     align-content: center;
+    margin-top: 1rem;
 }
 
 .home.active {
@@ -52,13 +53,14 @@
 }
 
 .house-icon {
-    color: black;
+    color: white;
     font-size: 1.5rem;
     min-width: 1.5rem;
+    z-index: 10;
 }
 
 .hometext {
-    color: black;
+    color: white;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-size: 16px;
@@ -66,7 +68,7 @@
 
 .calendar {
     flex-direction: row;
-    background-color: white;
+    background-color: transparent;
     border-radius: 45px;
     min-height: 2.5rem;
     align-items: center;
@@ -83,13 +85,14 @@
 }
 
 .calendar-icon {
-    color: black;
+    color: white;
     font-size: 1.5rem;
     min-width: 1.5rem;
+    z-index: 10;
 }
 
 .calendartext {
-    color: black;
+    color: white;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-size: 16px;
@@ -97,12 +100,12 @@
 
 .logout {
     flex-direction: row;
-    background-color: white;
+    background-color: transparent;
     border-radius: 45px;
     min-height: 2.5rem;
     align-items: center;
     align-content: center;
-    margin-top: 67vh;
+    margin-top: 65vh;
 }
 
 .logout:hover {
@@ -114,14 +117,36 @@
     align-content: center;
 }
 .logout-icon {
-    color: black;
+    color: white;
     font-size: 1.5rem;
     min-width: 1.5rem;
+    z-index: 10;
 }
 
 .logouttext {
-    color: black;
+    color: white;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-size: 16px;
+}
+
+.hometext, .calendartext, .logouttext {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease 0.1s, visibility 0s 0.3s, transform 0.3s ease;
+}
+
+.fade-in {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    transition: opacity 0.3s ease, visibility 0s 0s, transform 0.3s ease;
+}
+
+.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease;
 }
