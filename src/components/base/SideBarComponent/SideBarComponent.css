@@ -1,16 +1,24 @@
 .sidebar {
-    width: 12vw;
     min-height: 100vh;
     background-color: white;
     flex-direction: column;
 }
 
-.logo {
-    
-    width: 5rem;
-    height: 5rem;
-    margin-left: 2.5rem;
-    margin-top: 1rem;
+.toggle-button {
+    background: transparent;
+    border: none;
+    color: black;
+    cursor: pointer;
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.menu-icon {
+    margin-left: 0.5rem;
+    font-size: 2rem;
+    color: black;
 }
 
 .buttons {
@@ -22,9 +30,25 @@
 
 .home {
     flex-direction: row;
-    background-color: #665CEB;
+    background-color: transparent;
     border-radius: 45px;
     min-height: 2.5rem;
+    align-items: center;
+    align-content: center;
+}
+
+.home:hover {
+    cursor: pointer;
+}
+
+.home-flex {
+    align-items: center;
+    align-content: center;
+}
+
+.house-icon {
+    color: black;
+    font-size: 2rem;
 }
 
 .hometext {
@@ -39,9 +63,55 @@
     background-color: white;
     border-radius: 45px;
     min-height: 2.5rem;
+    align-items: center;
+    align-content: center;
+}
+
+.faq:hover {
+    cursor: pointer;
+}
+
+.faq-flex {
+    align-items: center;
+    align-content: center;
+}
+
+.faq-icon {
+    color: black;
+    font-size: 2rem;
 }
 
 .faqtext {
+    color: black;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.logout {
+    flex-direction: row;
+    background-color: white;
+    border-radius: 45px;
+    min-height: 2.5rem;
+    align-items: center;
+    align-content: center;
+    margin-top: 65vh;
+}
+
+.logout:hover {
+    cursor: pointer;
+}
+
+.logout-flex {
+    align-items: center;
+    align-content: center;
+}
+.logout-icon {
+    color: black;
+    font-size: 2rem;
+}
+
+.logouttext {
     color: black;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
