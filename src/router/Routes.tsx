@@ -5,6 +5,7 @@ import Home from "@/pages/Home/home";
 import Card from "@/pages/Card/Card";
 import Profile from "@/pages/Profile/profile";
 import ForgotPassword from "@/pages/ForgotPassword/forgotPassword";
+import Subscribe from "@/pages/Inscricao/Subscribe";
 
 const AppRoutes= () => {
     return(
@@ -16,6 +17,7 @@ const AppRoutes= () => {
             <Route path="/home" element={<Home/>}></Route>
             <Route path="/card" element={<Card/>}></Route>
             <Route path="/profile" element={<Profile/>}></Route>
+            <Route path="/subscribe" element={<Subscribe/>}></Route>
         </Routes>
     </Router>
     )
