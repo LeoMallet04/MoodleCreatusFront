@@ -17,8 +17,9 @@
 
 .menu-icon {
     margin-left: 0.5rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: black;
+    min-width: 1.5rem;
 }
 
 .buttons {
@@ -37,6 +38,10 @@
     align-content: center;
 }
 
+.home.active {
+    background-color: #2E23A7;
+}
+
 .home:hover {
     cursor: pointer;
 }
@@ -48,17 +53,18 @@
 
 .house-icon {
     color: black;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    min-width: 1.5rem;
 }
 
 .hometext {
     color: black;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 16px;
 }
 
-.faq {
+.calendar {
     flex-direction: row;
     background-color: white;
     border-radius: 45px;
@@ -67,25 +73,26 @@
     align-content: center;
 }
 
-.faq:hover {
+.calendar:hover {
     cursor: pointer;
 }
 
-.faq-flex {
+.calendar-flex {
     align-items: center;
     align-content: center;
 }
 
-.faq-icon {
+.calendar-icon {
     color: black;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    min-width: 1.5rem;
 }
 
-.faqtext {
+.calendartext {
     color: black;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .logout {
@@ -95,7 +102,7 @@
     min-height: 2.5rem;
     align-items: center;
     align-content: center;
-    margin-top: 65vh;
+    margin-top: 67vh;
 }
 
 .logout:hover {
@@ -108,12 +115,13 @@
 }
 .logout-icon {
     color: black;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    min-width: 1.5rem;
 }
 
 .logouttext {
     color: black;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 16px;
 }
