@@ -3,27 +3,27 @@ import { Flex } from "@chakra-ui/react/flex";
 import { useNavigate } from "react-router-dom";
 import { Image } from "@chakra-ui/react";
 import cadeado from "../../../assets/icons/cadeado.png";
+import Textura from "../../../assets/images/Textura.png";
 
 interface CardProps {
     index: number;
     url: string;
-    isBlocked: boolean;
+    isBlocked?: boolean;
     image: string;
 }
 
-function Card({ index, url, isBlocked, image }: CardProps) {
+function Card({ index, url, isBlocked = false, image }: CardProps) {
+
     const navigate = useNavigate();
 
-    const handleClick = () => {
-        if (!isBlocked) {
-            navigate(url);
-        }
+    function handleClick() {
+        if (isBlocked) return
+        navigate(url);
     };
-
 
     return (
         <Flex
-            backgroundImage={`url(${image})`}
+            backgroundImage={`url(${image ? image : Textura})`}
             width={"250px"}
             height={"150px"}
             alignItems={"end"}
@@ -33,7 +33,7 @@ function Card({ index, url, isBlocked, image }: CardProps) {
             position={"relative"}
         >
             <Box
-                backgroundColor={"#4C30E8"}
+                backgroundColor={"#2E23A7"}
                 width={"250px"}
                 height={"35px"}
                 textAlign={"center"}
@@ -42,7 +42,19 @@ function Card({ index, url, isBlocked, image }: CardProps) {
             >
                 <h1>Sprint {index}</h1>
             </Box>
-            <Flex position={"absolute"} top={0} left={0} backgroundColor={"#ADADAD70"} height={"100%"} width={"100%"} justifyContent={"center"} alignItems={"center"} borderRadius={"10px"} style={{display: isBlocked ? "flex" : "none"}}>
+            <Flex
+                position={"absolute"}
+                top={0}
+                left={0}
+                backgroundColor={"#9989B4B3"}
+                height={"100%"}
+                width={"100%"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                borderRadius={"10px"}
+                pb={"35px"}
+                style={{display: isBlocked ? "flex" : "none"}}
+            >
                 <Image src={cadeado}></Image>
             </Flex>
         </Flex>
