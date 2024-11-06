@@ -59,7 +59,7 @@ function LandingPage() {
                     color={"white"}
                     padding={"20px 40px"}
                     width={"150px"}
-                    onClick={() => { navigate("/subscribe") }}
+                    onClick={() => { navigate("/profile") }}
                 >
                     Inscreva-se
                 </Button>
