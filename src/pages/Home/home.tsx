@@ -1,8 +1,8 @@
-
+import NavBar from "@/components/base/NavBar/NavBar";
 
 function Home(){
     return(
-        <h1>Home</h1>
+        <NavBar></NavBar>
     )
 }
 
