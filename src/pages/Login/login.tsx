@@ -15,12 +15,11 @@ function Login(){
               <Field label="Email" color={"white"}>
                 <Input placeholder="me@example.com" width={{base:"200px",sm:"250px" ,md:"350px"}} borderRadius={"40px"} backgroundColor={"#D9D9D9"} color={"#000000"} fontSize={{base:"10px",sm:"12px", md:"16px"}}/>
               </Field>
-
               <Field label="Senha" color={"white"} marginTop={"10px"}>
                 <Input placeholder="Digite sua senha" type="password" width={{base:"200px",sm:"250px" ,md:"350px"}} borderRadius={"40px"} backgroundColor={"#D9D9D9"} color={"#000000"}/>
               </Field>
             </Box>
-            <Button onClick= {() =>{navigate("/home")}} background={"#2E23A7"} width={{base:"100px",sm:"250px" ,md:"350px"}} height= {"50px"} borderRadius={"20px"} fontSize={{sm:"18px",md:"24px"}} color={"white"} marginBottom={"-10px"} margin={"10px"}>
+            <Button onClick= {() =>{navigate("/home")}} background={"#2E23A7"}  width={{base:"100px",sm:"250px" ,md:"350px"}} height= {"50px"} borderRadius={"20px"} fontSize={{sm:"18px",md:"24px"}} color={"white"} marginBottom={"-10px"} margin={"10px"} shadow="7px 10px 10px 5px rgba(0, 0, 3, .2)"> 
                 Entrar
             </Button>
             <Link to={"forgotPassword"} style={{ color: "gray", textDecoration: "underline" }}>
