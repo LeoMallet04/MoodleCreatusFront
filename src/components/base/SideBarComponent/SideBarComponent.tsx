@@ -1,74 +1,117 @@
-import './SideBarComponent.css'
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Flex, Text } from "@chakra-ui/react";
-import { RiHome6Line } from "react-icons/ri";
-import { RiCalendarLine } from "react-icons/ri";
+import { Flex, IconButton, Text, Button } from "@chakra-ui/react";
+import { RiHome6Line, RiCalendarLine, RiLogoutBoxLine } from "react-icons/ri";
 import { FiMenu } from "react-icons/fi";
-import { RiLogoutBoxLine } from "react-icons/ri";
 
-function SideBar(){
-
+function SideBar() {
     const [isOpen, setIsOpen] = useState(false);
-
     const toggleSidebar = () => setIsOpen(!isOpen);
 
     const navigate = useNavigate();
-
     const goToHome = () => navigate('/home');
-
     const goToLogin = () => navigate('/login');
-
     const location = useLocation();
 
     const isHomeActive = location.pathname === '/home';
 
-    //const isCalendarActive = location.pathname === '/calendar';
-
     return (
-        <Flex className="sidebar"
-              width={isOpen ? "10.5vw" : "4vw"}
-              transition="width 0.3s">
-            
-            <button className="toggle-button" onClick={toggleSidebar}>
-                <FiMenu className="menu-icon" />
-                
-            </button>
+        <Flex
+            direction="column"
+            minH="100vh"
+            bg="#0B2436"
+            width={isOpen ? "10.5vw" : "4vw"}
+            transition="width 0.3s"
+            overflow="hidden"
+        >
+            <IconButton
+                aria-label="Toggle Menu"
+                bg="transparent"
+                color="white"
+                onClick={toggleSidebar}
+                m="0.5rem"
+                _hover={{ bg: "transparent" }}
+                fontSize="1.5rem"
+            >
+                <FiMenu />
+            </IconButton>
 
-            <Flex className="buttons">
-                <button className={`home ${isHomeActive ? 'active' : ''}`} onClick={goToHome}>
-                    <Flex className="home-flex" align="center">
-                        <RiHome6Line className='house-icon'/>
+            <Flex direction="column" width="100%" px="1rem" gap="0.5rem" alignItems={"center"}>
+                <Button
+                    bg={isHomeActive ? "#2E23A7" : "transparent"}
+                    borderRadius="45px"
+                    minH="2.5rem"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="flex-start"
+                    onClick={goToHome}
+                    _hover={{ bg: isHomeActive ? "#2E23A7" : "rgba(255, 255, 255, 0.1)" }}
+                >
+                    <RiHome6Line color="white" fontSize="1.5rem" />
+                    {isOpen && (
                         <Text
-                            ml={1}
-                            className={`hometext ${isOpen ? "fade-in" : "fade-out"}`}
+                            ml="1"
+                            color="white"
+                            fontFamily="Poppins, sans-serif"
+                            fontWeight="700"
+                            fontSize="16px"
+                            transition="opacity 0.3s ease, transform 0.3s ease"
                         >
                             Home
                         </Text>
-                    </Flex>
-                </button>
-                <button className="calendar">
-                    <Flex className="calendar-flex" align="center">
-                        <RiCalendarLine className='calendar-icon'/>
+                    )}
+                </Button>
+
+                <Button
+                    bg="transparent"
+                    borderRadius="45px"
+                    minH="2.5rem"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="flex-start"
+                    _hover={{ bg: "rgba(255, 255, 255, 0.1)" }}
+                >
+                    <RiCalendarLine color="white" fontSize="1.5rem" />
+                    {isOpen && (
                         <Text
-                            ml={1}
-                            className={`calendartext ${isOpen ? "fade-in" : "fade-out"}`}
+                            ml="1"
+                            color="white"
+                            fontFamily="Poppins, sans-serif"
+                            fontWeight="700"
+                            fontSize="16px"
+                            transition="opacity 0.3s ease, transform 0.3s ease"
                         >
                             Calendário
                         </Text>
-                    </Flex>
-                </button>
-                <button className="logout" onClick={goToLogin}>
-                    <Flex className="logout-flex">
-                        <RiLogoutBoxLine className='logout-icon'/>
+                    )}
+                </Button>
+
+                <Button
+                    bg="transparent"
+                    borderRadius="45px"
+                    minH="2.5rem"
+                    mt="auto"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="flex-start"
+                    onClick={goToLogin}
+                    _hover={{ bg: "rgba(255, 255, 255, 0.1)" }}
+                    marginTop={"69vh"}
+                >
+                    <RiLogoutBoxLine color="white" fontSize="1.5rem" />
+                    {isOpen && (
                         <Text
-                            ml={1}
-                            className={`logouttext ${isOpen ? "fade-in" : "fade-out"}`}
+                            ml="1"
+                            color="white"
+                            fontFamily="Poppins, sans-serif"
+                            fontWeight="700"
+                            fontSize="16px"
+                            transition="opacity 0.3s ease, transform 0.3s ease"
                         >
                             Sair
                         </Text>
-                    </Flex>
-                </button>
+                    )}
+                </Button>
             </Flex>
         </Flex>
     );
