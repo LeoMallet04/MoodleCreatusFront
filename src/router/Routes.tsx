@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "@/pages/LandingPage/ladingPage";
 import Login from "@/pages/Login/login";
 import Home from "@/pages/Home/home";
-import Card from "@/pages/Card/Card";
+import Card from "@/pages/Sprint/Sprint";
 import Profile from "@/pages/Profile/profile";
 import ForgotPassword from "@/pages/ForgotPassword/forgotPassword";
 import Subscribe from "@/pages/Inscricao/Subscribe";

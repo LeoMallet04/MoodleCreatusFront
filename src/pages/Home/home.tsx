@@ -1,12 +1,19 @@
 import NavBar from "@/components/base/NavBar/NavBar";
-import Card from "@/components/base/Card/Card";
+import Card from "../../components/base/Card/Card"
+import { Flex } from "@chakra-ui/react";
+import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
+
 
 function Home(){
     return(
         <>
-            <NavBar />
-            <Card index={0} url={""} image={""} />
-            <Card index={0} url={""} isBlocked image={""} />
+        <Flex></Flex>
+            <NavBar/>
+            <SideBar/>
+          <Flex/> 
+            <Flex>
+                <Card index={0} url={""} image={""}/>
+            </Flex>
         </>
     )
 }
