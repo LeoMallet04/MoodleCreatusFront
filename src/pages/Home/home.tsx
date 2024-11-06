@@ -7,13 +7,19 @@ import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 function Home(){
     return(
         <>
-        <Flex></Flex>
+        <Flex >
             <NavBar/>
             <SideBar/>
-          <Flex/> 
-            <Flex>
-                <Card index={0} url={""} image={""}/>
+            
             </Flex>
+            <Flex margin={"200px"} >
+                <Card index={1} url={""} image={""}/>
+                <Card index={2} url={""} image={""}/>
+                <Card index={3} url={""} image={""}/>
+                <Card index={4} url={""} image={""}/>
+                <Card index={5} url={""} image={""}/>
+             </Flex>
+         
         </>
     )
 }
