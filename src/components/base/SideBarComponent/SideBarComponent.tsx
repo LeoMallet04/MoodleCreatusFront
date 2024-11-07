@@ -25,27 +25,41 @@ function SideBar() {
             overflow="hidden"
         >
             <IconButton
+                width="1rem"
+                borderRadius="45px"
                 aria-label="Toggle Menu"
                 bg="transparent"
                 color="white"
                 onClick={toggleSidebar}
                 m="0.5rem"
-                _hover={{ bg: "transparent" }}
+                ml="0.4rem"
+                _hover={{ bg: isHomeActive ? "#2E23A7" : "rgba(255, 255, 255, 0.1)" }}
                 fontSize="1.5rem"
+                alignItems="center"
+                justifyContent="center"
             >
                 <FiMenu />
             </IconButton>
 
-            <Flex direction="column" width="100%" px="1rem" gap="0.5rem" alignItems={"center"}>
+            <Flex
+                direction="column"
+                width="100%"
+                px="0rem"
+                gap="0.5rem"
+                alignItems={isOpen ? "flex-start" : "center"}
+                mt={"1rem"}
+            >
                 <Button
                     bg={isHomeActive ? "#2E23A7" : "transparent"}
                     borderRadius="45px"
                     minH="2.5rem"
+                    width={isOpen ? "100%" : "1rem"}
                     display="flex"
                     alignItems="center"
-                    justifyContent="flex-start"
+                    justifyContent={isOpen ? "flex-start" : "center"}
                     onClick={goToHome}
                     _hover={{ bg: isHomeActive ? "#2E23A7" : "rgba(255, 255, 255, 0.1)" }}
+                    px={isOpen ? "1rem" : "0"}
                 >
                     <RiHome6Line color="white" fontSize="1.5rem" />
                     {isOpen && (
@@ -66,10 +80,12 @@ function SideBar() {
                     bg="transparent"
                     borderRadius="45px"
                     minH="2.5rem"
+                    width={isOpen ? "100%" : "1rem"}
                     display="flex"
                     alignItems="center"
-                    justifyContent="flex-start"
+                    justifyContent={isOpen ? "flex-start" : "center"}
                     _hover={{ bg: "rgba(255, 255, 255, 0.1)" }}
+                    px={isOpen ? "1rem" : "0"}
                 >
                     <RiCalendarLine color="white" fontSize="1.5rem" />
                     {isOpen && (
@@ -90,13 +106,14 @@ function SideBar() {
                     bg="transparent"
                     borderRadius="45px"
                     minH="2.5rem"
-                    mt="auto"
+                    width={isOpen ? "100%" : "1rem"}
                     display="flex"
                     alignItems="center"
-                    justifyContent="flex-start"
+                    justifyContent={isOpen ? "flex-start" : "center"}
                     onClick={goToLogin}
                     _hover={{ bg: "rgba(255, 255, 255, 0.1)" }}
-                    marginTop={"69vh"}
+                    px={isOpen ? "1rem" : "0"}
+                    marginTop="64vh"
                 >
                     <RiLogoutBoxLine color="white" fontSize="1.5rem" />
                     {isOpen && (
