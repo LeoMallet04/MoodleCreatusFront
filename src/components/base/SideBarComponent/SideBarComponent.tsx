@@ -17,8 +17,10 @@ function SideBar() {
 
     return (
         <Flex
+            zIndex={1}
             direction="column"
             minH="100vh"
+            height={"100vh"}
             bg="#0B2436"
             width={isOpen ? "10.5vw" : "4vw"}
             transition="width 0.3s"
