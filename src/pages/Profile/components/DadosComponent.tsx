@@ -1,4 +1,4 @@
-import { Flex, Span } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 function DadosComponent(){
     return(
@@ -12,6 +12,7 @@ function DadosComponent(){
             borderRadius={"10px"}
             display={"flex"}
             flexDirection={"column"}
+            zIndex={1}
         >
             <Flex
                 display={"flex"}
@@ -25,9 +26,9 @@ function DadosComponent(){
                     width={"30%"}
                     height={"40%"} 
                 >
-                    <Span>Curso</Span>
-                    <Span>Email</Span>
-                    <Span>GitHub</Span>
+                    <Text>Curso</Text>
+                    <Text>Email</Text>
+                    <Text>GitHub</Text>
                 </Flex>
 
                 <Flex
@@ -37,9 +38,9 @@ function DadosComponent(){
                     width={"70%"}
                     height={"40%"}   
                 >
-                    <Span>Engenharia de Software</Span>
-                    <Span>exemplo@gmail.com</Span>
-                    <Span>Username</Span>
+                    <Text>Engenharia de Software</Text>
+                    <Text>exemplo@gmail.com</Text>
+                    <Text>Username</Text>
                 </Flex>
 
             </Flex>
@@ -51,8 +52,8 @@ function DadosComponent(){
                 height={"30%"}
                 zIndex={10}
             >
-                <Span color={"white"}>Faltas</Span>
-                <Span color={"#559DE6"}>3</Span>
+                <Text color={"white"}>Faltas</Text>
+                <Text color={"#559DE6"}>3</Text>
             </Flex>
 
             <Flex>
