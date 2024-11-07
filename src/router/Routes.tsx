@@ -6,12 +6,14 @@ import Card from "@/pages/Card/Card";
 import Profile from "@/pages/Profile/profile";
 import ForgotPassword from "@/pages/ForgotPassword/forgotPassword";
 import Subscribe from "@/pages/Inscricao/Subscribe";
+import ChangePassword from "@/pages/ChangePassword/changePassword";
 
 const AppRoutes= () => {
     return(
     <Router>
         <Routes>
             <Route path="/login/forgotPassword" element={<ForgotPassword/>}></Route>
+            <Route path="/login/changePassword" element={<ChangePassword/>}></Route>
             <Route path="/" element={<LandingPage/>}></Route>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/home" element={<Home/>}></Route>
