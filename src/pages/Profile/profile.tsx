@@ -1,63 +1,138 @@
-import { Flex, HStack, Stack, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { Flex, HStack, Stack, Text, Grid, GridItem, Badge, Box } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 import NavBar from "@/components/base/NavBar/NavBar";
+import {
+    AccordionItem,
+    AccordionItemTrigger,
+    AccordionRoot,
+} from "@/components/ui/accordion";
 
-const authenticatedUser = {
+interface User {
+    id: string;
+    name: string;
+    email: string;
+    avatar: string;
+}
+
+const authenticatedUser: User = {
     id: "1",
     name: "Nome Usuario",
     email: "email@example.com",
     avatar: "",
 };
 
-const Profile = () => {
+const projects = [
+    { title: "Calculadora", description: "Breve descrição do projeto de Calculadora", tags: ["CSS", "HTML", "JavaScript"] },
+    { title: "Conversor de Moedas", description: "Breve descrição do projeto de Conversor de Moedas", tags: ["React", "API", "JavaScript"] },
+    { title: "Portfolio", description: "Breve descrição do projeto de Portfolio", tags: ["React", "Chakra UI", "TypeScript"] },
+];
+
+const Profile: React.FC = () => {
+    const [showCards, setShowCards] = useState(false);
+
+    const handleAccordionClick = () => {
+        setShowCards((prev) => !prev);
+    };
+
     return (
-        <Flex direction={"column"} width={"100vw"} height={"100vh"} overflowX="hidden">
+        <Flex direction="column" width="100vw" height="100vh" overflowX="hidden">
             <NavBar />
             <Flex flex="1" zIndex={1} position="fixed" top={0} left={0} height="100vh">
                 <SideBar />
-                <Flex
-                    position="relative"
-                    top={14}
-                    left={0}
-                    width="100vw"
-                    height="100vh"
-                    bg={"#021823"}
-                    zIndex={1}
-                />
-                <Flex
-                    flex="1"
-                    zIndex={10}
+                <Flex position="relative" top={{ base: 0, md: 14 }} left={0} width="100vw" height="100vh" bg="#021823" zIndex={1} />
+
+                <Grid
+                    templateColumns={{ base: "1fr", md: "1fr 1fr" }}
                     position="fixed"
-                    top={40}
-                    left={60}
+                    top={{ base: 24, md: 40 }}
+                    left={{ base: 4, md: 60 }}
                     alignItems="center"
+                    width={{ base: "calc(100vw - 8px)", md: "calc(100vw - 60px)" }}
+                    zIndex={10}
+                    gap={5}
+                    p={{ base: 4, md: 0 }}
                 >
-                    <HStack gap="4" align="center">
-                        <Avatar
-                            name={authenticatedUser.name}
-                            size="lg"
-                            src={authenticatedUser.avatar}
-                            style={{
-                                width: '22vh',
-                                height: '22vh'
-                            }} />
-                        <Stack gap="0">
-                            <Text
-                                color='#C2CFD9'
-                                width='222vh'
-                                height='4vw'
-                                justifyContent='center'
-                                alignItems='center'
-                                fontWeight='bold'
-                                fontFamily='Inter'
-                                fontSize='1.5rem'
+                    <GridItem>
+                        <HStack gap={4} align="center">
+                            <Avatar
+                                name={authenticatedUser.name}
+                                size={{ base: "md", md: "lg" }}
+                                src={authenticatedUser.avatar}
+                                style={{
+                                    width: '22vh',
+                                    height: '22vh',
+                                }}
+                            />
+                            <Stack gap={0}>
+                                <Text
+                                    color="#C2CFD9"
+                                    fontWeight="bold"
+                                    fontFamily="Inter"
+                                    fontSize={{ base: "1.25rem", md: "1.5rem" }}
+                                >
+                                    {authenticatedUser.name}
+                                </Text>
+                            </Stack>
+                        </HStack>
+                    </GridItem>
+
+                    <GridItem>
+                        <Text fontFamily="Inter" fontWeight="bold" fontSize={{ base: "1.25rem", md: "1.5rem" }} color="#FFFFFF">
+                            Meus Projetos
+                        </Text>
+                        <AccordionRoot collapsible defaultValue={["a"]}>
+                            <AccordionItem
+                                value="a"
+                                width={{ base: "100%", md: "50%" }}
+                                border={"0rem solid rgba(255, 255, 255, 0.12)"}
+                                borderRadius={"1rem"}
+                                mb={"4"}
+                                p={"2"}
+                                bg={"rgba(255, 255, 255, 0.05)"}
+
                             >
-                                {authenticatedUser.name}
-                            </Text>
-                        </Stack>
-                    </HStack>
-                </Flex>
+                                <AccordionItemTrigger onClick={handleAccordionClick}>
+
+                                </AccordionItemTrigger>
+                            </AccordionItem>
+                        </AccordionRoot>
+
+                        {showCards && (
+                            <Grid
+                                templateColumns={{ base: "1fr", sm: "repeat(1fr)", lg: "repeat(1fr)" }}
+                                gap={6}
+                                mt={4}
+                                width={"50%"}
+                            >
+                                {projects.map((project, index) => (
+                                    <Box
+                                        key={index}
+                                        p={4}
+                                        borderRadius="lg"
+                                        bg="rgba(255, 255, 255, 0.05)"
+                                        borderColor="rgba(255, 255, 255, 0.12)"
+                                    >
+                                        <Text fontFamily="Inter" fontWeight="bold" fontSize="1.25rem" color="#4175A6" mb={2}>
+                                            {project.title}
+                                        </Text>
+                                        <Text fontFamily="Inter" fontSize="1rem" color="#C2CFD9" mb={4}>
+                                            {project.description}
+                                        </Text>
+                                        <HStack>
+                                            {project.tags.map((tag, i) => (
+                                                <Badge key={i} colorScheme="purple">
+                                                    {tag}
+                                                </Badge>
+                                            ))}
+                                        </HStack>
+                                    </Box>
+                                ))}
+                            </Grid>
+                        )}
+                    </GridItem>
+                </Grid>
             </Flex>
         </Flex>
     );
