@@ -2,10 +2,15 @@ import { Box, Flex, Image, Input, Text } from "@chakra-ui/react"
 import { Field } from "@/components/ui/field"
 import { Button } from "@/components/ui/button";
 import Titulo from "../../assets/GRUPO DE ESTUDOS.svg";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function forgotPassword(){
-    const navigate= useNavigate();
+    const [popupVisible, setPopupVisible] = useState(false);
+
+    const handleSendClick = () => {
+        setPopupVisible(true);
+    };
+
     return (
         <Flex bgGradient="to-bl" gradientFrom= {"var(--gradient1)"} gradientTo= {"var(--gradient2)"} height={"100vh"} width={"100vw"} justifyContent={"center"} flexDirection={"column"} alignItems={"center"}  gap={"30px"}>
           <Flex justifyContent={"center"} flexDirection={"column"} alignItems={"center"}  gap={{base:"15px",sm:"30px"}} backgroundColor={"#223547"} padding={"20px 30px"} borderRadius={"20px"}> 
@@ -29,9 +34,14 @@ function forgotPassword(){
                 <Input placeholder="me@example.com" width={{base:"200px",sm:"250px" ,md:"350px"}} borderRadius={"40px"} backgroundColor={"#D9D9D9"} color={"#000000"} fontSize={{base:"10px",sm:"12px", md:"16px"}} />
               </Field>
             </Box>
-            <Button onClick= {() =>{navigate("token")}} background={"#2E23A7"}  width={{base:"100px",sm:"250px" ,md:"350px"}} height= {"50px"} borderRadius={"20px"} fontSize={{sm:"18px",md:"24px"}} color={"white"} marginBottom={"-10px"} margin={"10px"} shadow="7px 10px 10px 5px rgba(0, 0, 3, .2)"> 
+            <Button onClick={handleSendClick} background={"#2E23A7"}  width={{base:"100px",sm:"250px" ,md:"350px"}} height= {"50px"} borderRadius={"20px"} fontSize={{sm:"18px",md:"24px"}} color={"white"} marginBottom={"-10px"} margin={"10px"} shadow="7px 10px 10px 5px rgba(0, 0, 3, .2)"> 
                 Enviar
             </Button>
+            {popupVisible && (
+                <Text color="red" marginTop="10px">
+                    Enviado, verifique seu Email.
+                </Text>
+            )}
           </Flex>
         </Flex>
       )
