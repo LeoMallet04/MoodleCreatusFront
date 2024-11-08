@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Image } from "@chakra-ui/react";
 import cadeado from "../../../assets/icons/cadeado.png";
 import Textura from "../../../assets/images/Textura.png";
+import { useState } from "react";
 
 interface CardProps {
     index: number;
@@ -15,14 +16,27 @@ interface CardProps {
 function Card({ index, url, isBlocked = false, image }: CardProps) {
 
     const navigate = useNavigate();
+    const [hover,setHover] = useState(false);
+
+
 
     function handleClick() {
         if (isBlocked) return
         navigate(url);
+
+     
+
+        
+
+
     };
 
     return (
         <Flex
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            transition={"0.3s"}
+            style={{transform : hover ? "scale(1.1)" : "scale(1)"}}
             backgroundImage={`url(${image ? image : Textura})`}
             width={"250px"}
             height={"150px"}
@@ -31,6 +45,7 @@ function Card({ index, url, isBlocked = false, image }: CardProps) {
             onClick={handleClick}
             cursor={isBlocked ? "not-allowed" : "pointer"}
             position={"relative"}
+          
         >
             <Box
                 backgroundColor={"#2E23A7"}

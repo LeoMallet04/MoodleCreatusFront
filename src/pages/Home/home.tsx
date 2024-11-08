@@ -4,7 +4,11 @@ import { Box, Flex, Text,Grid } from "@chakra-ui/react";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 
 
+
+
+
 function Home(){
+    
     return(
         
         <Box > 
@@ -18,15 +22,15 @@ function Home(){
                     <Flex my={"10"} flexWrap={"wrap"} gap={"180px"} rowGap={"100px"} color={"white"}  marginLeft={"120px"}>
 
                     
-                        <Card index={1} url={""} image={""}/> 
+                        <Card index={1} url={"/Sprint"} image={""}  /> 
 
-                        <Card isBlocked index={2} url={""} image={""}/> 
+                        <Card isBlocked index={2} url={"/Sprint"} image={""}/> 
 
-                        <Card isBlocked index={3} url={""} image={""}/> 
+                        <Card isBlocked index={3} url={"/Sprint"} image={""}/> 
 
-                        <Card isBlocked index={4} url={""} image={""}/> 
+                        <Card isBlocked index={4} url={"/Sprint"} image={""}/> 
                         
-                        <Card isBlocked index={5} url={""} image={""}/> 
+                        <Card isBlocked index={5} url={"/Sprint"} image={""}/> 
                     
                     </Flex>
                 </Flex>
