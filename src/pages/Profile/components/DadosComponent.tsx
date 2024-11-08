@@ -8,38 +8,35 @@ interface DadosComponentProps {
     faltas: number;
 }
 
-function DadosComponent({ curso, email, github, faltas }: DadosComponentProps){
-
-    return(
+function DadosComponent({ curso, email, github, faltas }: DadosComponentProps) {
+    return (
         <Flex
-            mt={"50px"}
-            ml={"50px"}
-            width={"22vw"}
-            height={"45vh"}
-            bg={"rgba(255, 255, 255, 0.12)"} 
+            mt={{ base: "30px", md: "40px", lg: "50px" }}
+            ml={{ base: "20px", md: "30px", lg: "50px" }}
+            width={{ base: "80vw", md: "50vw", lg: "22vw" }}
+            height={{ base: "auto", md: "50vh", lg: "45vh" }}
+            bg={"rgba(255, 255, 255, 0.12)"}
             borderRadius={"10px"}
             display={"flex"}
             flexDirection={"column"}
             zIndex={1}
             padding={"1.2rem"}
-            gap={"2rem"}
+            gap={{ base: "1rem", md: "1.5rem", lg: "2rem" }}
         >
             <Flex
-                display={"flex"}
                 flexDirection={"row"}
                 zIndex={10}
-                gap={"4rem"}
+                gap={{ base: "2rem", md: "3rem", lg: "4rem" }}
                 fontFamily={"Inter"}
             >
                 <Flex
-                    display={"flex"}
-                    flexDirection={"column"}  
+                    flexDirection={"column"}
                     color={"#559DE6"}
-                    fontSize={"12px"}
-                    fontFamily={"Inter"} 
+                    fontSize={{ base: "10px", md: "11px", lg: "12px" }}
+                    fontFamily={"Inter"}
                     width={"30%"}
                     height={"40%"}
-                    gap={"0.5rem"} 
+                    gap={"0.5rem"}
                 >
                     <Text>Curso</Text>
                     <Text>Email</Text>
@@ -47,14 +44,13 @@ function DadosComponent({ curso, email, github, faltas }: DadosComponentProps){
                 </Flex>
 
                 <Flex
-                    display={"flex"}
                     flexDirection={"column"}
-                    color={"white"} 
-                    fontSize={"12px"}
+                    color={"white"}
+                    fontSize={{ base: "10px", md: "11px", lg: "12px" }}
                     fontFamily={"Inter"}
                     width={"70%"}
                     height={"40%"}
-                    gap={"0.5rem"}   
+                    gap={"0.5rem"}
                 >
                     <Text>{curso}</Text>
                     <Text>{email}</Text>
@@ -63,7 +59,6 @@ function DadosComponent({ curso, email, github, faltas }: DadosComponentProps){
             </Flex>
 
             <Flex
-                display={"flex"}
                 flexDirection={"column"}
                 height={"30%"}
                 zIndex={10}
@@ -71,29 +66,28 @@ function DadosComponent({ curso, email, github, faltas }: DadosComponentProps){
                 alignItems={"center"}
                 gap={"0.5rem"}
             >
-                <Text color={"white"} fontSize={"12px"}>Faltas</Text>
-                <Text color={"#559DE6"} fontSize={"30px"}>{faltas}</Text>
+                <Text color={"white"} fontSize={{ base: "10px", md: "11px", lg: "12px" }}>Faltas</Text>
+                <Text color={"#559DE6"} fontSize={{ base: "26px", md: "28px", lg: "30px" }}>{faltas}</Text>
             </Flex>
 
-            <Flex
-                alignContent={"center"}
-                alignItems={"center"}
-            >
+            <Flex alignContent={"center"} alignItems={"center"}>
                 <Button
                     width={"100%"}
-                    height={"5vh"}
+                    height={{ base: "4vh", md: "5vh", lg: "5vh" }}
                     bg={"#21262D"}
                     cursor={"pointer"}
-                    gap={"9rem"}
+                    gap={{ base: "7rem", md: "8rem", lg: "9rem" }}
                 >
-                    <Text color={"#559DE6"} fontSize={"12px"} fontFamily={"Inter"}>Trocar senha</Text>
-                    <Icon fontSize={"14px"}>
-                    <ImShare color={"#559DE6"}/>
+                    <Text color={"#559DE6"} fontSize={{ base: "10px", md: "11px", lg: "12px" }} fontFamily={"Inter"}>
+                        Trocar senha
+                    </Text>
+                    <Icon fontSize={{ base: "12px", md: "13px", lg: "14px" }}>
+                        <ImShare color={"#559DE6"} />
                     </Icon>
                 </Button>
             </Flex>
         </Flex>
-    )
+    );
 }
 
 export default DadosComponent;

@@ -5,7 +5,13 @@ import DadosComponent from "./components/DadosComponent";
 function Profile(){
     return(
         <Flex>
-            <DadosComponent></DadosComponent>
+<DadosComponent 
+    curso="Engenharia de Software" 
+    email="exemplo@gmail.com" 
+    github="Username" 
+    faltas={3} 
+/>
+
         </Flex>
         
     )
