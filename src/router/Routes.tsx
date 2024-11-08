@@ -4,7 +4,7 @@ import Login from "@/pages/Login/login";
 import Home from "@/pages/Home/home";
 import Card from "@/pages/Card/Card";
 import Profile from "@/pages/Profile/profile";
-import ForgotPassword from "@/pages/ForgotPassword/ForgotPassword";
+import ForgotPassword from "@/pages/ForgotPassword/forgotPassword";
 import Subscribe from "@/pages/Inscricao/Subscribe";
 
 const AppRoutes= () => {
