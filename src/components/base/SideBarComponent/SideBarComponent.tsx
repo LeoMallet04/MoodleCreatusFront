@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Flex, IconButton, Text, Button } from "@chakra-ui/react";
+import { Flex, IconButton, Text, Button, Grid } from "@chakra-ui/react";
 import { RiHome6Line, RiCalendarLine, RiLogoutBoxLine } from "react-icons/ri";
 import { FiMenu } from "react-icons/fi";
 
@@ -16,36 +16,50 @@ function SideBar() {
     const isHomeActive = location.pathname === '/home';
 
     return (
-        <Flex
+        <Grid
+            paddingTop={"10px"}
             direction="column"
             minH="100vh"
             bg="#0B2436"
             width={isOpen ? "10.5vw" : "4vw"}
             transition="width 0.3s"
             overflow="hidden"
+            justifyContent={"center"}
+            position={"fixed"}
         >
             <IconButton
+                width="1rem"
+                borderRadius="45px"
                 aria-label="Toggle Menu"
                 bg="transparent"
                 color="white"
                 onClick={toggleSidebar}
-                m="0.5rem"
-                _hover={{ bg: "transparent" }}
-                fontSize="1.5rem"
+                _hover={{ bg: isHomeActive ? "#2E23A7" : "rgba(255, 255, 255, 0.1)" }}
+                alignItems="center"
+                justifyContent="center"
             >
                 <FiMenu />
             </IconButton>
 
-            <Flex direction="column" width="100%" px="1rem" gap="0.5rem" alignItems={"center"}>
+            <Flex
+                direction="column"
+                width="100%"
+                px="0rem"
+                gap="0.5rem"
+                alignItems={isOpen ? "flex-start" : "center"}
+                mt={"1rem"}
+            >
                 <Button
                     bg={isHomeActive ? "#2E23A7" : "transparent"}
                     borderRadius="45px"
                     minH="2.5rem"
+                    width={isOpen ? "100%" : "1rem"}
                     display="flex"
                     alignItems="center"
-                    justifyContent="flex-start"
+                    justifyContent={isOpen ? "flex-start" : "center"}
                     onClick={goToHome}
                     _hover={{ bg: isHomeActive ? "#2E23A7" : "rgba(255, 255, 255, 0.1)" }}
+                    px={isOpen ? "1rem" : "0"}
                 >
                     <RiHome6Line color="white" fontSize="1.5rem" />
                     {isOpen && (
@@ -66,10 +80,12 @@ function SideBar() {
                     bg="transparent"
                     borderRadius="45px"
                     minH="2.5rem"
+                    width={isOpen ? "100%" : "1rem"}
                     display="flex"
                     alignItems="center"
-                    justifyContent="flex-start"
+                    justifyContent={isOpen ? "flex-start" : "center"}
                     _hover={{ bg: "rgba(255, 255, 255, 0.1)" }}
+                    px={isOpen ? "1rem" : "0"}
                 >
                     <RiCalendarLine color="white" fontSize="1.5rem" />
                     {isOpen && (
@@ -85,18 +101,20 @@ function SideBar() {
                         </Text>
                     )}
                 </Button>
-
-                <Button
+            </Flex>
+            <Button
                     bg="transparent"
                     borderRadius="45px"
                     minH="2.5rem"
-                    mt="auto"
+                    width={isOpen ? "100%" : "1rem"}
                     display="flex"
                     alignItems="center"
-                    justifyContent="flex-start"
+                    justifyContent={isOpen ? "flex-start" : "center"}
                     onClick={goToLogin}
-                    _hover={{ bg: "rgba(255, 255, 255, 0.1)" }}
-                    marginTop={"69vh"}
+                    _hover={{ bg:    "rgba(255, 255, 255, 0.1)" }}
+                    px={isOpen ? "1rem" : "0"}
+                    marginTop="64vh"
+                    justifySelf={"end"}
                 >
                     <RiLogoutBoxLine color="white" fontSize="1.5rem" />
                     {isOpen && (
@@ -112,8 +130,7 @@ function SideBar() {
                         </Text>
                     )}
                 </Button>
-            </Flex>
-        </Flex>
+        </Grid>
     );
 }
 
