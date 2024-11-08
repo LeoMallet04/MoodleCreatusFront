@@ -20,15 +20,14 @@ function Home(){
                     
                         <Card index={1} url={""} image={""}/> 
 
-                        <Card index={2} url={""} image={""}/> 
+                        <Card isBlocked index={2} url={""} image={""}/> 
 
-                        <Card index={3} url={""} image={""}/> 
+                        <Card isBlocked index={3} url={""} image={""}/> 
 
-                        <Card index={4} url={""} image={""}/> 
+                        <Card isBlocked index={4} url={""} image={""}/> 
                         
-                        <Card index={5} url={""} image={""}/> 
+                        <Card isBlocked index={5} url={""} image={""}/> 
                     
-
                     </Flex>
                 </Flex>
             </Grid>
