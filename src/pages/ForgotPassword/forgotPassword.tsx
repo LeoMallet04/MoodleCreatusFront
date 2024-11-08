@@ -38,7 +38,7 @@ function forgotPassword(){
                 Enviar
             </Button>
             {popupVisible && (
-                <Text color="red" marginTop="10px">
+                <Text color="white" marginTop="10px">
                     Enviado, verifique seu Email.
                 </Text>
             )}
