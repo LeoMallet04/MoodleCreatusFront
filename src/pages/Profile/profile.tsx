@@ -1,8 +1,13 @@
+import { Flex } from "@chakra-ui/react";
+import DadosComponent from "./components/DadosComponent";
 
 
 function Profile(){
     return(
-        <h1>Profile</h1>
+        <Flex>
+            <DadosComponent></DadosComponent>
+        </Flex>
+        
     )
 }
 

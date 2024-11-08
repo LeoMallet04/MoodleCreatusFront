@@ -1,7 +1,15 @@
 import { Flex, Text, Button, Icon } from "@chakra-ui/react";
 import { ImShare } from "react-icons/im";
 
-function DadosComponent(){
+interface DadosComponentProps {
+    curso: string;
+    email: string;
+    github: string;
+    faltas: number;
+}
+
+function DadosComponent({ curso, email, github, faltas }: DadosComponentProps){
+
     return(
         <Flex
             mt={"50px"}
@@ -48,9 +56,9 @@ function DadosComponent(){
                     height={"40%"}
                     gap={"0.5rem"}   
                 >
-                    <Text>Engenharia de Software</Text>
-                    <Text>exemplo@gmail.com</Text>
-                    <Text>Username</Text>
+                    <Text>{curso}</Text>
+                    <Text>{email}</Text>
+                    <Text>{github}</Text>
                 </Flex>
             </Flex>
 
@@ -64,7 +72,7 @@ function DadosComponent(){
                 gap={"0.5rem"}
             >
                 <Text color={"white"} fontSize={"12px"}>Faltas</Text>
-                <Text color={"#559DE6"} fontSize={"30px"}>3</Text>
+                <Text color={"#559DE6"} fontSize={"30px"}>{faltas}</Text>
             </Flex>
 
             <Flex
