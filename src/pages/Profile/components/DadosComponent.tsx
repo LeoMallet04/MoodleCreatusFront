@@ -8,7 +8,7 @@ function DadosComponent(){
             ml={"50px"}
             width={"22vw"}
             height={"45vh"}
-            bg={"rgba(255, 255, 255, 0.12)"} // Usando rgba para aplicar opacidade ao fundo
+            bg={"rgba(255, 255, 255, 0.12)"} 
             borderRadius={"10px"}
             display={"flex"}
             flexDirection={"column"}
