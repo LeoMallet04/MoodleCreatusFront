@@ -17,6 +17,7 @@ function SideBar() {
 
     return (
         <Grid
+            paddingTop={"10px"}
             direction="column"
             minH="100vh"
             bg="#0B2436"
@@ -24,6 +25,7 @@ function SideBar() {
             transition="width 0.3s"
             overflow="hidden"
             justifyContent={"center"}
+            position={"fixed"}
         >
             <IconButton
                 width="1rem"
