@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Flex, HStack, Stack, Text, Grid, GridItem, Badge, Box } from "@chakra-ui/react";
+import { Flex, HStack, Stack, Text, Grid, GridItem, Badge, Box, List, ListItem } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 import NavBar from "@/components/base/NavBar/NavBar";
@@ -9,6 +9,7 @@ import {
     AccordionItemTrigger,
     AccordionRoot,
 } from "@/components/ui/accordion";
+import AddProjeto from "./components/AddProjeto";
 
 interface User {
     id: string;
@@ -46,18 +47,17 @@ const Profile: React.FC = () => {
             <Flex zIndex={10} position="fixed" top={0} left={0} height="100vh">
                 <SideBar/>
                 
-
                 <Grid
-                    templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-                    position="relative"
-                    top={{ base: 24, md: 10 }}
-                    left={{ base: 4, md: 40 }}
-                    alignItems="center"
-                    width={{ base: "calc(100vw - 8px)", md: "calc(100vw - 60px)" }}
-                    gap={5}
-                    p={{ base: 4, md: 0 }}
+                     templateColumns={{ base: "1fr", md: "1fr 1fr" }}
+                     position="relative"
+                     top={{ base: 24, md: 10 }}
+                     left={{ base: 4, md: 40 }}
+                     alignItems="center"
+                     width={{ base: "calc(100vw - 8px)", md: "calc(100vw - 60px)" }}
+                     gap={5}
+                     p={{ base: 4, md: 0 }}
                 >
-                    <GridItem>
+                <GridItem>
                         <HStack gap={4} align="center" marginLeft={"6%"}>
                             <Avatar
                                 name={authenticatedUser.name}
@@ -93,6 +93,7 @@ const Profile: React.FC = () => {
 
                     </GridItem>
 
+
                     <GridItem marginBottom={"50%"}>
                         <Text fontFamily="Inter" fontWeight="bold" top={"100"} fontSize={{ base: "1.25rem", md: "1.5rem" }} color="#FFFFFF">
                             Meus Projetos
@@ -118,20 +119,22 @@ const Profile: React.FC = () => {
                                 templateColumns={{ base: "1fr", sm: "repeat(1fr)", lg: "repeat(1fr)" }}
                                 gap={6}
                                 mt={4}
+                                height={"0px"}
                                 width={"50%"}
                             >
                                 {projects.map((project, index) => (
                                     <Box
                                         key={index}
                                         p={4}
+                                        h={"120px"}
                                         borderRadius="lg"
                                         bg="rgba(255, 255, 255, 0.05)"
                                         borderColor="rgba(255, 255, 255, 0.12)"
                                     >
-                                        <Text fontFamily="Inter" fontWeight="bold" fontSize="1.25rem" color="#4175A6" mb={2}>
+                                        <Text fontFamily="Inter" fontWeight="bold" fontSize="xl" color="#4175A6" mb={2}>
                                             {project.title}
                                         </Text>
-                                        <Text fontFamily="Inter" fontSize="1rem" color="#C2CFD9" mb={4}>
+                                        <Text fontFamily="Inter" fontSize="small" color="#C2CFD9" mb={4}>
                                             {project.description}
                                         </Text>
                                         <HStack>
@@ -147,6 +150,10 @@ const Profile: React.FC = () => {
                         )}
                     </GridItem>
                 </Grid>
+                {/* <Grid
+                   
+                > */}
+                   
             </Flex>
         </Flex>
 
