@@ -33,11 +33,10 @@ function Home() {
 
             <Grid gridTemplateColumns={"auto 1fr"}>
                 <SideBar />
-                <Flex display={"flex-colum"} backgroundColor={"var(--gradient1)"} >
+                <Flex display={"flex-colum"} backgroundColor={"var(--gradient1)"}  height={"100vh"} width={"100vw"}>
                     <Text fontSize={"30px"} color={"white"} fontWeight={"400px"} marginTop={"100px"} marginLeft={"120px"}>Home</Text>
 
                     <Flex my={"10"} flexWrap={"wrap"} gap={"180px"} rowGap={"100px"} color={"white"} marginLeft={"120px"}>
-
                         {cards.map((card, index) => (
                             <Card key={index} title={card.title} url={card.url} image={card.image} isBlocked={card.isBlocked} ></Card>
                         ))}
