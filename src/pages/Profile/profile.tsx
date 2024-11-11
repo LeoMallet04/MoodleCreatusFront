@@ -38,20 +38,22 @@ const Profile: React.FC = () => {
     };
 
     return (
-            <Flex direction="column" width="100vw" height="100vh" overflowX="hidden" backgroundColor="red !important">
+        
+
+        
+            <Flex direction="column" width="100vw" height="100vh" overflowX="hidden" bg={"#021823"}>
             <NavBar/>
-            <Flex flex="1" zIndex={1000} position="fixed" top={0} left={0} height="100vh" backgroundColor="red !important">
+            <Flex zIndex={10} position="fixed" top={0} left={0} height="100vh">
                 <SideBar/>
                 
 
                 <Grid
                     templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-                    position="fixed"
-                    top={{ base: 24, md: 20 }}
+                    position="relative"
+                    top={{ base: 24, md: 10 }}
                     left={{ base: 4, md: 40 }}
                     alignItems="center"
                     width={{ base: "calc(100vw - 8px)", md: "calc(100vw - 60px)" }}
-                    zIndex={10}
                     gap={5}
                     p={{ base: 4, md: 0 }}
                 >
@@ -147,8 +149,7 @@ const Profile: React.FC = () => {
                 </Grid>
             </Flex>
         </Flex>
-    
-        
+
     );
 };
 
