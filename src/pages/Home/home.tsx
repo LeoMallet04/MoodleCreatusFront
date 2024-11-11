@@ -25,7 +25,6 @@ function Home() {
             .catch((error) => console.error('Error fetching data: ' + error));
     }, [])
 
-
     return (
 
         <Box >
@@ -33,14 +32,12 @@ function Home() {
 
             <Grid gridTemplateColumns={"auto 1fr"}>
                 <SideBar />
-                <Flex display={"flex-colum"} backgroundColor={"var(--gradient1)"}  height={"100vh"} width={"100vw"}>
-                    <Text fontSize={"30px"} color={"white"} fontWeight={"400px"} marginTop={"100px"} marginLeft={"120px"}>Home</Text>
-
-                    <Flex my={"10"} flexWrap={"wrap"} gap={"180px"} rowGap={"100px"} color={"white"} marginLeft={"120px"}>
+                <Flex display={"flex-colum"} backgroundColor={"var(--gradient1)"}  minHeight={{sm:"100%",md:"100vh"}} width={"100vw"}>
+                    <Text fontSize={"30px"} color={"white"} marginTop={"100px"} marginLeft={{base:"40px",sm:"80px",md:"120px"}}>Home</Text>
+                    <Flex my={"20px"} flexWrap={"wrap"} gap={{base:"50px 80px",md:"80px 100px",xl:"100px 180px"}} color={"white"} marginLeft={{base:"40px",sm:"80px",md:"120px"}} justifyContent={{base:"center",sm:"start"}}>
                         {cards.map((card, index) => (
                             <Card key={index} title={card.title} url={card.url} image={card.image} isBlocked={card.isBlocked} ></Card>
                         ))}
-
                     </Flex>
                 </Flex>
             </Grid>

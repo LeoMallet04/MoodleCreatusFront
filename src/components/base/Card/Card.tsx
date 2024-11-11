@@ -23,12 +23,6 @@ function Card({ title, url, isBlocked = false, image }: CardProps) {
     function handleClick() {
         if (isBlocked) return
         navigate(url);
-
-
-
-
-
-
     };
 
     return (
@@ -38,8 +32,8 @@ function Card({ title, url, isBlocked = false, image }: CardProps) {
             transition={"0.3s"}
             style={{ transform: hover ? "scale(1.1)" : "scale(1)" }}
             backgroundImage={`url(${image ? (isBlocked ? Textura : image) : Textura})`}
-            width={"250px"}
-            height={"150px"}
+            width={{base:"180px",sm:"200px",md:"250px"}}
+            height={{base:"100px",sm:"120px",md:"150px"}}
             alignItems={"end"}
             borderRadius={"10px"}
             onClick={handleClick}
