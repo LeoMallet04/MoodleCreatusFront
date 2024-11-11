@@ -6,13 +6,12 @@ import cadeado from "../../../assets/icons/cadeado.png";
 import Textura from "../../../assets/images/Textura.png";
 
 interface CardProps {
-    index: number;
+    title : string;
     url: string;
     isBlocked?: boolean;
-    image: string;
 }
 
-function Card({ index, url, isBlocked = false, image }: CardProps) {
+function Card({ url, isBlocked = false,title }: CardProps) {
 
     const navigate = useNavigate();
 
@@ -23,7 +22,7 @@ function Card({ index, url, isBlocked = false, image }: CardProps) {
 
     return (
         <Flex
-            backgroundImage={`url(${image ? image : Textura})`}
+            backgroundImage={Textura}
             width={"250px"}
             height={"150px"}
             alignItems={"end"}
@@ -40,7 +39,7 @@ function Card({ index, url, isBlocked = false, image }: CardProps) {
                 paddingTop={"5px"}
                 borderRadius={"0px 0px 10px 10px"}
             >
-                <h1>Sprint {index}</h1>
+                <h1>{title}</h1>
             </Box>
             <Flex
                 position={"absolute"}
