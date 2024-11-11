@@ -3,6 +3,7 @@ import { Flex, HStack, Stack, Text, Grid, GridItem, Badge, Box } from "@chakra-u
 import { Avatar } from "@/components/ui/avatar";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 import NavBar from "@/components/base/NavBar/NavBar";
+import DadosComponent from "./components/DadosComponent";
 import {
     AccordionItem,
     AccordionItemTrigger,
@@ -37,17 +38,17 @@ const Profile: React.FC = () => {
     };
 
     return (
-        <Flex direction="column" width="100vw" height="100vh" overflowX="hidden">
-            <NavBar />
-            <Flex flex="1" zIndex={1} position="fixed" top={0} left={0} height="100vh">
-                <SideBar />
-                <Flex position="relative" top={{ base: 0, md: 14 }} left={0} width="100vw" height="100vh" bg="#021823" zIndex={1} />
+            <Flex direction="column" width="100vw" height="100vh" overflowX="hidden" backgroundColor="red !important">
+            <NavBar/>
+            <Flex flex="1" zIndex={1000} position="fixed" top={0} left={0} height="100vh" backgroundColor="red !important">
+                <SideBar/>
+                
 
                 <Grid
                     templateColumns={{ base: "1fr", md: "1fr 1fr" }}
                     position="fixed"
-                    top={{ base: 24, md: 40 }}
-                    left={{ base: 4, md: 60 }}
+                    top={{ base: 24, md: 20 }}
+                    left={{ base: 4, md: 40 }}
                     alignItems="center"
                     width={{ base: "calc(100vw - 8px)", md: "calc(100vw - 60px)" }}
                     zIndex={10}
@@ -55,7 +56,7 @@ const Profile: React.FC = () => {
                     p={{ base: 4, md: 0 }}
                 >
                     <GridItem>
-                        <HStack gap={4} align="center">
+                        <HStack gap={4} align="center" marginLeft={"6%"}>
                             <Avatar
                                 name={authenticatedUser.name}
                                 size={{ base: "md", md: "lg" }}
@@ -76,10 +77,22 @@ const Profile: React.FC = () => {
                                 </Text>
                             </Stack>
                         </HStack>
+
+                        <HStack>
+                            <Stack>
+                                <DadosComponent
+                                    curso="Engenharia de Software"
+                                    email="exemplo@gmail.com"
+                                    github="Username"
+                                    faltas={0}
+                                ></DadosComponent>
+                            </Stack>
+                        </HStack>
+
                     </GridItem>
 
-                    <GridItem>
-                        <Text fontFamily="Inter" fontWeight="bold" fontSize={{ base: "1.25rem", md: "1.5rem" }} color="#FFFFFF">
+                    <GridItem marginBottom={"50%"}>
+                        <Text fontFamily="Inter" fontWeight="bold" top={"100"} fontSize={{ base: "1.25rem", md: "1.5rem" }} color="#FFFFFF">
                             Meus Projetos
                         </Text>
                         <AccordionRoot collapsible defaultValue={["a"]}>
@@ -91,7 +104,6 @@ const Profile: React.FC = () => {
                                 mb={"4"}
                                 p={"2"}
                                 bg={"rgba(255, 255, 255, 0.05)"}
-
                             >
                                 <AccordionItemTrigger onClick={handleAccordionClick}>
 
@@ -135,6 +147,8 @@ const Profile: React.FC = () => {
                 </Grid>
             </Flex>
         </Flex>
+    
+        
     );
 };
 
