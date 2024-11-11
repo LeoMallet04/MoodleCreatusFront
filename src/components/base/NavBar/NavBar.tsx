@@ -9,7 +9,7 @@ function NavBar() {
     const navigate = useNavigate();
 
   return (
-    <Box width={"100vw"} height={"100vh"} background={"white"}>
+    <Box width={"100vw"}>
       < Grid
         backgroundColor={"var(--gradient1)"}
         height={"60px"}

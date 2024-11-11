@@ -21,14 +21,15 @@ function SideBar() {
             direction="column"
             minH="100vh"
             bg="#0B2436"
-            width={isOpen ? "10.5vw" : "4vw"}
+            width={isOpen ? {base:"40vw",md:"10.5vw"} : {base:"8vw",md:"4vw"}}
             transition="width 0.3s"
             overflow="hidden"
             justifyContent={"center"}
             position={"fixed"}
+            zIndex={1}
         >
             <IconButton
-                width="1rem"
+                width={{base:"4rem",md:"1rem"}}
                 borderRadius="45px"
                 aria-label="Toggle Menu"
                 bg="transparent"
@@ -37,8 +38,9 @@ function SideBar() {
                 _hover={{ bg: isHomeActive ? "#2E23A7" : "rgba(255, 255, 255, 0.1)" }}
                 alignItems="center"
                 justifyContent="center"
+                size={{base:"xs",md:"2xl"}}
             >
-                <FiMenu />
+                <FiMenu/>
             </IconButton>
 
             <Flex
@@ -59,7 +61,9 @@ function SideBar() {
                     justifyContent={isOpen ? "flex-start" : "center"}
                     onClick={goToHome}
                     _hover={{ bg: isHomeActive ? "#2E23A7" : "rgba(255, 255, 255, 0.1)" }}
-                    px={isOpen ? "1rem" : "0"}
+
+                    px={isOpen ? "1rem" : "0rem"}
+
                 >
                     <RiHome6Line color="white" fontSize="1.5rem" />
                     {isOpen && (
@@ -68,7 +72,7 @@ function SideBar() {
                             color="white"
                             fontFamily="Poppins, sans-serif"
                             fontWeight="700"
-                            fontSize="16px"
+                            fontSize={{base:"12px",md:"16px"}}
                             transition="opacity 0.3s ease, transform 0.3s ease"
                         >
                             Home
@@ -94,7 +98,7 @@ function SideBar() {
                             color="white"
                             fontFamily="Poppins, sans-serif"
                             fontWeight="700"
-                            fontSize="16px"
+                            fontSize={{base:"12px",md:"16px"}}
                             transition="opacity 0.3s ease, transform 0.3s ease"
                         >
                             Calendário
@@ -114,16 +118,16 @@ function SideBar() {
                     _hover={{ bg:    "rgba(255, 255, 255, 0.1)" }}
                     px={isOpen ? "1rem" : "0"}
                     marginTop="64vh"
-                    justifySelf={"end"}
+                    justifySelf={"center"}
                 >
-                    <RiLogoutBoxLine color="white" fontSize="1.5rem" />
+                    <RiLogoutBoxLine color="white" fontSize="1.5rem"/>
                     {isOpen && (
                         <Text
                             ml="1"
                             color="white"
                             fontFamily="Poppins, sans-serif"
                             fontWeight="700"
-                            fontSize="16px"
+                            fontSize={{base:"12px",md:"16px"}}
                             transition="opacity 0.3s ease, transform 0.3s ease"
                         >
                             Sair

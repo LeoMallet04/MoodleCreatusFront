@@ -1,13 +1,49 @@
 import NavBar from "@/components/base/NavBar/NavBar";
-import Card from "@/components/base/Card/Card";
+import Card, { CardProps } from "../../components/base/Card/Card"
+import { Box, Flex, Text, Grid } from "@chakra-ui/react";
+import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
+import { useEffect, useState } from "react";
 
-function Home(){
-    return(
-        <>
+function Home() {
+
+    const [cards, setCards] = useState<CardProps[]>([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/cards')
+            .then(res => res.json())
+            .then(data => {
+                data.sort((a: CardProps, b: CardProps) => {
+                    if (a.isBlocked && !b.isBlocked) {
+                        return 1;
+                    }
+                    if (!a.isBlocked && b.isBlocked) {
+                        return -1;
+                    }
+                })
+                setCards(data)
+            })
+            .catch((error) => console.error('Error fetching data: ' + error));
+    }, [])
+
+    return (
+
+        <Box >
             <NavBar />
-            <Card index={0} url={""} image={""} />
-            <Card index={0} url={""} isBlocked image={""} />
-        </>
+
+            <Grid gridTemplateColumns={"auto 1fr"}>
+                <SideBar />
+                <Flex display={"flex-colum"} backgroundColor={"var(--gradient1)"}  minHeight={{sm:"100%",md:"100vh"}} width={"100vw"}>
+                    <Text fontSize={"30px"} color={"white"} marginTop={"100px"} marginLeft={{base:"40px",sm:"80px",md:"120px"}}>Home</Text>
+                    <Flex my={"20px"} flexWrap={"wrap"} gap={{base:"50px 80px",md:"80px 100px",xl:"100px 180px"}} color={"white"} marginLeft={{base:"40px",sm:"80px",md:"120px"}} justifyContent={{base:"center",sm:"start"}}>
+                        {cards.map((card, index) => (
+                            <Card key={index} title={card.title} url={card.url} image={card.image} isBlocked={card.isBlocked} ></Card>
+                        ))}
+                    </Flex>
+                </Flex>
+            </Grid>
+
+        </Box>
+
     )
 }
 
