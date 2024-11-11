@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Flex, HStack, Stack, Text, Grid, GridItem, Badge, Box, List, ListItem } from "@chakra-ui/react";
+import { Flex, HStack, Stack, Text, Grid, GridItem, Badge, Box,} from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 import NavBar from "@/components/base/NavBar/NavBar";
@@ -102,6 +102,7 @@ const Profile: React.FC = () => {
                             <AccordionItem
                                 value="a"
                                 width={{ base: "100%", md: "50%" }}
+                                height={"30px"}
                                 border={"0rem solid rgba(255, 255, 255, 0.12)"}
                                 borderRadius={"1rem"}
                                 mb={"4"}
@@ -125,7 +126,8 @@ const Profile: React.FC = () => {
                                 {projects.map((project, index) => (
                                     <Box
                                         key={index}
-                                        p={4}
+                                        pl={4}
+                                        pt={3}
                                         h={"120px"}
                                         borderRadius="lg"
                                         bg="rgba(255, 255, 255, 0.05)"
