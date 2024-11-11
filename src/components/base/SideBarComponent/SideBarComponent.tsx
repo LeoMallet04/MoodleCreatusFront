@@ -61,7 +61,9 @@ function SideBar() {
                     justifyContent={isOpen ? "flex-start" : "center"}
                     onClick={goToHome}
                     _hover={{ bg: isHomeActive ? "#2E23A7" : "rgba(255, 255, 255, 0.1)" }}
+
                     px={isOpen ? "1rem" : "0rem"}
+
                 >
                     <RiHome6Line color="white" fontSize="1.5rem" />
                     {isOpen && (

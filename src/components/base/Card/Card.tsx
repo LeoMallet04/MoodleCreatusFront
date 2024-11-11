@@ -6,14 +6,17 @@ import cadeado from "../../../assets/icons/cadeado.png";
 import Textura from "../../../assets/images/Textura.png";
 import { useState } from "react";
 
-export interface CardProps {
-    title: string;
+
+interface CardProps {
+    title : string;
     url: string;
     isBlocked?: boolean;
     image: string;
 }
 
+
 function Card({ title, url, isBlocked = false, image }: CardProps) {
+
 
     const navigate = useNavigate();
     const [hover, setHover] = useState(false);
@@ -27,6 +30,7 @@ function Card({ title, url, isBlocked = false, image }: CardProps) {
 
     return (
         <Flex
+
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
             transition={"0.3s"}
