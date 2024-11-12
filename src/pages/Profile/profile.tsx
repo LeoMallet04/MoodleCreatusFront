@@ -23,6 +23,13 @@ const authenticatedUser: User = {
 };
 
 
+//trocar para uma função que exiba uma lista dos projetos
+//API que puxa projeto do github - variaveis necessarias: nome do usuario e nome do projeto
+const projects = [
+    { title: "Calculadora", description: "Breve descrição do projeto de Calculadora", tags: ["CSS", "HTML", "JavaScript"] },
+    { title: "Conversor de Moedas", description: "Breve descrição do projeto de Conversor de Moedas", tags: ["React", "API", "JavaScript"] },
+    { title: "Portfolio", description: "Breve descrição do projeto de Portfolio", tags: ["React", "Chakra UI", "TypeScript"] },
+];
 
 const Profile: React.FC = () => {
     const [showCards, setShowCards] = useState(false);
