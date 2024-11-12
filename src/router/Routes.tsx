@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "@/pages/LandingPage/ladingPage";
-import Login from "@/pages/Login/login";
+import Login from "@/pages/Login/Login";
 import Home from "@/pages/Home/Home";
 import Sprint from "@/pages/Sprint/Sprint";
 import Profile from "@/pages/Profile/profile";
