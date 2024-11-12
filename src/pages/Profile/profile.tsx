@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Flex, HStack, Stack, Text, Grid, GridItem, Badge, Box } from "@chakra-ui/react";
+import { Flex, HStack, Stack, Text, Grid, GridItem, Badge, Box, Button, Input } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 import NavBar from "@/components/base/NavBar/NavBar";
@@ -9,6 +9,7 @@ import {
     AccordionItemTrigger,
     AccordionRoot,
 } from "@/components/ui/accordion";
+import { FaRegPlusSquare } from "react-icons/fa";
 
 interface User {
     id: string;
@@ -24,41 +25,59 @@ const authenticatedUser: User = {
     avatar: "",
 };
 
-const projects = [
-    { title: "Calculadora", description: "Breve descrição do projeto de Calculadora", tags: ["CSS", "HTML", "JavaScript"] },
-    { title: "Conversor de Moedas", description: "Breve descrição do projeto de Conversor de Moedas", tags: ["React", "API", "JavaScript"] },
-    { title: "Portfolio", description: "Breve descrição do projeto de Portfolio", tags: ["React", "Chakra UI", "TypeScript"] },
+const initialProjects = [
+    { title: "Calculadora", description: "Breve descrição do projeto de Calculadora", tags: ["CSS", "HTML", "JavaScript"] }
 ];
 
 const Profile: React.FC = () => {
     const [showCards, setShowCards] = useState(false);
+    const [addProjectBoxVisible, setAddProjectBoxVisible] = useState(false);
+    const [projects, setProjects] = useState(initialProjects);
+    const [newProject, setNewProject] = useState({ title: "", description: "", repoLink: "" });
 
     const handleAccordionClick = () => {
         setShowCards((prev) => !prev);
     };
 
+    const handleAddProjectBoxToggle = () => {
+        setAddProjectBoxVisible((prev) => !prev);
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setNewProject((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const addNewProject = () => {
+        setProjects((prevProjects) => [
+            ...prevProjects,
+            {
+                title: newProject.title,
+                description: newProject.description,
+                tags: ["GitHub"],
+            },
+        ]);
+        setNewProject({ title: "", description: "", repoLink: "" });
+        setAddProjectBoxVisible(false);
+    };
+
     return (
-        
-
-        
-            <Flex direction="column" width="100vw" height="100vh" overflowX="hidden" bg={"#021823"}>
-            <NavBar/>
+        <Flex direction="column" width="100vw" height="100vh" overflowX="hidden" bg={"#021823"}>
+            <NavBar />
             <Flex zIndex={10} position="fixed" top={0} left={0} height="100vh">
-                <SideBar/>
-                
-
+                <SideBar />
                 <Grid
                     templateColumns={{ base: "1fr", md: "1fr 1fr" }}
                     position="relative"
                     top={{ base: 24, md: 10 }}
                     left={{ base: 4, md: 40 }}
-                    alignItems="center"
+                    alignItems="flex"
                     width={{ base: "calc(100vw - 8px)", md: "calc(100vw - 60px)" }}
                     gap={5}
                     p={{ base: 4, md: 0 }}
                 >
                     <GridItem>
-                        <HStack gap={4} align="center" marginLeft={"6%"}>
+                        <HStack gap={4} align="center" marginLeft={"6%"} marginTop={"10%"}>
                             <Avatar
                                 name={authenticatedUser.name}
                                 size={{ base: "md", md: "lg" }}
@@ -79,7 +98,6 @@ const Profile: React.FC = () => {
                                 </Text>
                             </Stack>
                         </HStack>
-
                         <HStack>
                             <Stack>
                                 <DadosComponent
@@ -87,16 +105,22 @@ const Profile: React.FC = () => {
                                     email="exemplo@gmail.com"
                                     github="Username"
                                     faltas={0}
-                                ></DadosComponent>
+                                />
                             </Stack>
                         </HStack>
-
                     </GridItem>
-
-                    <GridItem marginBottom={"50%"}>
-                        <Text fontFamily="Inter" fontWeight="bold" top={"100"} fontSize={{ base: "1.25rem", md: "1.5rem" }} color="#FFFFFF">
-                            Meus Projetos
-                        </Text>
+                    <GridItem marginBottom={"50%"} marginTop={"10%"} flexDirection={"row"}>
+                        <HStack marginLeft={"2%"} gap={2}>
+                            <Text
+                                fontFamily="Inter"
+                                fontWeight="bold"
+                                fontSize={{ base: "1.25rem", md: "1.5rem" }}
+                                color="#FFFFFF"
+                            >
+                                Meus Projetos
+                            </Text>
+                            <FaRegPlusSquare color="#FFFFFF" onClick={handleAddProjectBoxToggle} cursor="pointer" />
+                        </HStack>
                         <AccordionRoot collapsible defaultValue={["a"]}>
                             <AccordionItem
                                 value="a"
@@ -107,12 +131,33 @@ const Profile: React.FC = () => {
                                 p={"2"}
                                 bg={"rgba(255, 255, 255, 0.05)"}
                             >
-                                <AccordionItemTrigger onClick={handleAccordionClick}>
-
-                                </AccordionItemTrigger>
+                                <AccordionItemTrigger onClick={handleAccordionClick} />
+                                {addProjectBoxVisible && (
+                                    <Box
+                                        p={4}
+                                        borderRadius="lg"
+                                        bg="rgba(255, 255, 255, 0.05)"
+                                        mt={2}
+                                        width="100%"
+                                        
+                                        display="flex"
+                                        flexDirection="row"
+                                        gap={3}
+                                    >
+                                        <Flex display={"flex"} flexDirection={"column"} width={"90%"} marginTop={"5%"}> 
+                                            <Input placeholder="Nome do Projeto" name="title" value={newProject.title} onChange={handleInputChange} mb={2} width={"100%"} height={"5vh"}/>
+                                            <Input placeholder="Subtítulo" name="description" value={newProject.description} onChange={handleInputChange} mb={2} width={"100%"} height={"5vh"}/>
+                                            <Input placeholder="Link do Repositório" name="repoLink" value={newProject.repoLink} onChange={handleInputChange} mb={4} width={"100%"} height={"5vh"}/> 
+                                        </Flex>
+                                        <Flex alignItems={"center"}>
+                                            <Button onClick={addNewProject} colorScheme="blue" alignSelf="flex-end" width={"10%"} marginLeft={"20%"} marginBottom={"85%"}>
+                                                Add
+                                            </Button>
+                                        </Flex>
+                                    </Box>
+                                )}
                             </AccordionItem>
                         </AccordionRoot>
-
                         {showCards && (
                             <Grid
                                 templateColumns={{ base: "1fr", sm: "repeat(1fr)", lg: "repeat(1fr)" }}
@@ -149,7 +194,6 @@ const Profile: React.FC = () => {
                 </Grid>
             </Flex>
         </Flex>
-
     );
 };
 
