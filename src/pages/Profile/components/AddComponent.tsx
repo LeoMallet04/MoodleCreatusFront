@@ -2,12 +2,17 @@ import { Stack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 
-function AddComponent() {
+interface AddComponentProps {
+    username : string
+    projectName: string;  
+  }
+
+function AddComponent({ username,projectName }: AddComponentProps) {
     const [repoName, setRepoName] = useState("");
     const [repoDescription, setRepoDescription] = useState("");
     const [repoLanguages, setRepoLanguages] = useState<string[]>([]);
 
-    const url = "https://api.github.com/repos/LeoMallet04/Calculator";
+    const url = `https://api.github.com/repos/${username}/${projectName}`;
     useEffect(() => {
         const getReposData = async (url: string) => {
             try {   
