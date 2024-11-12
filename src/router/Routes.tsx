@@ -7,6 +7,7 @@ import Profile from "@/pages/Profile/profile";
 import ForgotPassword from "@/pages/ForgotPassword/ForgotPassword";
 import Subscribe from "@/pages/Inscricao/Subscribe";
 import ChangePassword from "@/pages/ChangePassword/changePassword";
+import Calendar from "@/pages/Calendar/Calendar";
 
 const AppRoutes= () => {
     return(
@@ -20,6 +21,7 @@ const AppRoutes= () => {
             <Route path="/sprint" element={<Sprint/>}></Route>
             <Route path="/profile" element={<Profile/>}></Route>
             <Route path="/subscribe" element={<Subscribe/>}></Route>
+            <Route path="/calendar" element={<Calendar/>}></Route>
         </Routes>
     </Router>
     )
