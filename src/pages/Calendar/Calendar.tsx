@@ -3,8 +3,43 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import { Box, Flex, Grid } from "@chakra-ui/react";
 import NavBar from "@/components/base/NavBar/NavBar";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
+import { useEffect, useState } from "react";
+import { EventSourceInput } from "@fullcalendar/core/index.js";
+
+
+type Evento = {
+  title: string,
+  start_date: string, //TRATANDO DATE COMO STRING, POR ALGUM MOTIVO O REACT NAO DEIXA USAR FUNCOES DE DATE
+  end_date: string, //NO FUTURO TIRAR A GAMBIARRA DO SLICE() E MUDAR ISSO TD P DATE
+}
 
 function Calendar() {
+
+  const [events, setEvents] = useState<EventSourceInput>([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/event/upcoming/now')
+      .then(res => res.json())
+      .then(data => {
+        data.forEach((event: Evento, index: number) => {
+          if (event.start_date == event.end_date) {
+            data[index] = {
+              title: event.title,
+              date: event.start_date.slice(0, event.start_date.indexOf('T'))
+            }
+          } else {
+            data[index] = {
+              title: event.title,
+              start: event.start_date.slice(0, event.start_date.indexOf('T')),
+              end: event.end_date.slice(0, event.start_date.indexOf('T'))
+            }
+          }
+        })
+        setEvents(data);
+        console.log(events);
+      })
+  }, [])
+
   return (
     <Flex
       height={"100vh"}
@@ -21,15 +56,7 @@ function Calendar() {
             height={"80vh"}
             plugins={[dayGridPlugin]}
             initialView="dayGridMonth"
-            events={[
-              { title: "event 1", date: "2024-11-11" },
-              { title: "event 1", date: "2024-11-11" },
-              {
-                title: "Multi-Day Event",
-                start: "2024-11-14",
-                end: "2024-11-20",
-              },
-            ]}
+            events={events}
           />
         </Box>
       </Grid>
