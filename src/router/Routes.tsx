@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from "@/pages/LandingPage/ladingPage";
-import Login from "@/pages/Login/login";
-import Home from "@/pages/Home/home";
+import LandingPage from "@/pages/LandingPage/LandingPage";
+import Login from "@/pages/Login/Login";
+import Home from "@/pages/Home/Home";
 import Sprint from "@/pages/Sprint/Sprint";
 import Profile from "@/pages/Profile/profile";
-import ForgotPassword from "@/pages/ForgotPassword/forgotPassword";
+import ForgotPassword from "@/pages/ForgotPassword/ForgotPassword";
 import Subscribe from "@/pages/Inscricao/Subscribe";
-import ChangePassword from "@/pages/ChangePassword/changePassword";
+import ChangePassword from "@/pages/ChangePassword/ChangePassword";
 
 const AppRoutes= () => {
     return(
