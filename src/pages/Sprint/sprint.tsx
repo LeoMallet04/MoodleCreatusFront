@@ -1,7 +1,13 @@
-
 import { Grid, Flex, Box,Text } from "@chakra-ui/react";
 import NavBar from "@/components/base/NavBar/NavBar";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
+import Card from "@/components/base/Card/Card"
+import { Swiper, SwiperSlide } from 'swiper/react';
+import {Navigation} from "swiper/modules"
+import "../../../node_modules/swiper/swiper-bundle.css";
+
+
+
 
 function Sprint(){
     return(
@@ -10,7 +16,7 @@ function Sprint(){
                 <SideBar></SideBar>
                 <Grid gridTemplateRows={"auto 1fr"} height={"100vh"}>
                     <NavBar></NavBar>
-                    <Grid fontFamily={"'Poppins',sans-serif"} gridTemplateRows={"0.32fr 0.04fr 0.2fr 0.07fr auto"} paddingLeft={"12%"} maxWidth={"80%"}>
+                    <Grid fontFamily={"'Poppins',sans-serif"} gridTemplateRows={"0.6fr 0.08fr 0.34r 0.07fr 1fr auto"} paddingLeft={"12%"} maxWidth={"75%"}>
                             <Box paddingTop={"1%"} >
                                 <Text fontSize={"2rem"}>Calculadora Web</Text >
                                 <Text fontSize={"1rem"}>Neste projeto, vamos criar uma calculadora funcional usando JavaScript, HTML e CSS. Ela permitirá operações básicas, 
@@ -29,7 +35,36 @@ function Sprint(){
                             <Box backgroundColor={"white"} width={"70vw"} height={"0.1vh"} marginTop="1vh" ></Box>
                             <Box  >
                                 <Text fontSize={"2rem"}> Materiais</Text>
+                                <Box>
+                                <Swiper
+                                    spaceBetween={1}
+                                    modules={[Navigation]}
+                                    slidesPerView={4}
+                                    navigation
+                                    onSlideChange={() => console.log('slide change')}
+                                    onSwiper={(swiper) => console.log(swiper)}
                                 
+                                    >
+                                    <SwiperSlide>
+                                        <Card  title={"html em 48 horas"} url={"youtube.com"} >
+                                        </Card>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <Card  title={"html em 48 horas"} url={"youtube.com"} >
+                                        </Card>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <Card  title={"html em 48 horas"} url={"youtube.com"} >
+                                        </Card>
+                                    </SwiperSlide>
+                                    <SwiperSlide>
+                                        <Card  title={"html em 48 horas"} url={"youtube.com"} >
+                                        </Card>
+                                    </SwiperSlide>
+                                    
+                                
+                                    </Swiper>
+                                    </Box>  
                             </Box>
                         </Grid>
 
