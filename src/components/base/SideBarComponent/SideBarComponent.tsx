@@ -11,6 +11,7 @@ function SideBar() {
     const navigate = useNavigate();
     const goToHome = () => navigate('/home');
     const goToLogin = () => navigate('/login');
+    const goToCalendar = () => navigate('/calendar');
     const location = useLocation();
 
     const isHomeActive = location.pathname === '/home';
@@ -90,6 +91,7 @@ function SideBar() {
                     justifyContent={isOpen ? "flex-start" : "center"}
                     _hover={{ bg: "rgba(255, 255, 255, 0.1)" }}
                     px={isOpen ? "1rem" : "0"}
+                    onClick={goToCalendar}
                 >
                     <RiCalendarLine color="white" fontSize="1.5rem" />
                     {isOpen && (
