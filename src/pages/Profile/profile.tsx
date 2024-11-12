@@ -18,6 +18,7 @@ interface User {
     avatar: string;
 }
 
+
 const authenticatedUser: User = {
     id: "1",
     name: "Nome Usuario",
@@ -192,6 +193,7 @@ const Profile: React.FC = () => {
                         )}
                     </GridItem>
                 </Grid>
+                   
             </Flex>
         </Flex>
     );
