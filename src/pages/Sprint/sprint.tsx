@@ -71,7 +71,7 @@ function Sprint() {
                     <Box backgroundColor="white" width="70vw" height="0.1vh" marginTop="1vh"></Box>
                     <Box>
                         <Text fontSize="2em">Materiais</Text>
-                        <Box width="75vw" marginTop="1vh">
+                        <Box width="75vw" marginTop="1vh" paddingRight={'50px'}>
                             <Swiper
                                 spaceBetween={"10%"} // Espaço entre slides
                                 modules={[Navigation, Autoplay]} // Adicionando Autoplay ao Swiper
