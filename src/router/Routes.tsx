@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "@/pages/LandingPage/LandingPage";
-import Login from "@/pages/Login/Login";
-import Home from "@/pages/Home/Home";
+import Login from "@/pages/Login";
+import Home from "@/pages/Home";
 import Sprint from "@/pages/Sprint/Sprint";
 import Profile from "@/pages/Profile/profile";
-import ForgotPassword from "@/pages/ForgotPassword/ForgotPassword";
+import ForgotPassword from "@/pages/ForgotPassword";
 import Subscribe from "@/pages/Inscricao/Subscribe";
 import ChangePassword from "@/pages/ChangePassword/changePassword";
 import Calendar from "@/pages/Calendar/Calendar";

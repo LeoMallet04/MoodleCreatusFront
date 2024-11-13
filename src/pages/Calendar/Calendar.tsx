@@ -60,6 +60,7 @@ function Calendar() {
         <NavBar />
         <Box width={"50vw"} justifySelf={"center"} marginTop={"30px"}>
           <FullCalendar
+          locale={'pt-br'}
             height={"80vh"}
             plugins={[dayGridPlugin]}
             initialView="dayGridMonth"
