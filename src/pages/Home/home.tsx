@@ -35,7 +35,7 @@ function Home() {
                     <Flex my={"20px"} flexWrap={"wrap"} gap={{ base: "50px 80px", md: "80px 100px", xl: "100px 180px" }} color={"white"} marginLeft={{ base: "40px", sm: "80px", md: "120px" }} justifyContent={{ base: "center", sm: "start" }}>
 
                         {cards.map((card, index) => (
-                            <Card key={index} title={card.title} url={`${card.url}/sprint=${index}`} image={card.image} isBlocked={card.isBlocked} ></Card>
+                            <Card key={index} index={index} title={card.title} url={card.url} isSprint={true} image={card.image} isBlocked={card.isBlocked} ></Card>
                         ))}
                     </Flex>
                 </Flex>

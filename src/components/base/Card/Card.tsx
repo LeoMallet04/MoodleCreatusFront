@@ -8,14 +8,16 @@ import { useState } from "react";
 
 
 export interface CardProps {
+    index?: number;
     title: string;
     url: string;
+    isSprint?: boolean;
     isBlocked?: boolean;
-    image: string;
+    image?: string;
 }
 
 
-function Card({ title, url, isBlocked = false, image }: CardProps) {
+function Card({ index, title, url, isBlocked = false, image, isSprint = false }: CardProps) {
 
 
     const navigate = useNavigate();
@@ -25,7 +27,7 @@ function Card({ title, url, isBlocked = false, image }: CardProps) {
 
     function handleClick() {
         if (isBlocked) return
-        window.location.href = url;
+        window.location.href = isSprint ? `/sprint?sprint=${index ? index + 1 : 1}` : url;
         //navigate(url);
     };
 
