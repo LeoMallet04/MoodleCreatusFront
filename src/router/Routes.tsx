@@ -9,21 +9,21 @@ import Subscribe from "@/pages/Inscricao/Subscribe";
 import ChangePassword from "@/pages/ChangePassword/changePassword";
 import Calendar from "@/pages/Calendar/Calendar";
 
-const AppRoutes= () => {
-    return(
-    <Router>
-        <Routes>
-            <Route path="/login/forgotPassword" element={<ForgotPassword/>}></Route>
-            <Route path="/login/changePassword" element={<ChangePassword/>}></Route>
-            <Route path="/" element={<LandingPage/>}></Route>
-            <Route path="/login" element={<Login/>}></Route>
-            <Route path="/home" element={<Home/>}></Route>
-            <Route path="/sprint" element={<Sprint/>}></Route>
-            <Route path="/profile" element={<Profile/>}></Route>
-            <Route path="/subscribe" element={<Subscribe/>}></Route>
-            <Route path="/calendar" element={<Calendar/>}></Route>
-        </Routes>
-    </Router>
+const AppRoutes = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/login/forgotPassword" element={<ForgotPassword />}></Route>
+                <Route path="/login/changePassword" element={<ChangePassword />}></Route>
+                <Route path="/" element={<LandingPage />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/home" element={<Home />}></Route>
+                <Route path="/sprint" element={<Sprint />}></Route>
+                <Route path="/profile" element={<Profile />}></Route>
+                <Route path="/subscribe" element={<Subscribe />}></Route>
+                <Route path="/calendar" element={<Calendar />}></Route>
+            </Routes>
+        </Router>
     )
 }
 
