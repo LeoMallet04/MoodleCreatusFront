@@ -5,21 +5,22 @@ import { Link } from "react-router-dom";
 import Titulo from "@/assets/GRUPO DE ESTUDOS.svg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-async function loginUser(email: string, password: string) {
-  const response = await fetch('http://localhost:3000/auth/login', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-  });
-  console.log(response);
-  if (!response.ok) {
-      throw new Error('Network response was not ok');
-  }
+import axios from 'axios';
 
-  return response.json();
+async function loginUser(email: string, password: string) {
+    try {
+        const response = await axios.post('http://localhost:3000/auth/login', {
+            email,
+            password
+        }, {
+            withCredentials: true
+        });
+
+        console.log('Login response:', response);
+    } catch (error) {
+        console.error('Login failed:', error);
+        throw new Error('Network response was not ok');
+    }
 }
 function LoginPage({link,label1,placeholder1,label2,placeholder2}:{link:string,label1:string,placeholder1:string,label2:string,placeholder2:string}){
     const navigate= useNavigate();
