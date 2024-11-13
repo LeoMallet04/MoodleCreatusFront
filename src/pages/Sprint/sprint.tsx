@@ -21,7 +21,7 @@ function Sprint() {
                 <NavBar />
                 <Grid
                     fontFamily="'Poppins', sans-serif"
-                    gridTemplateRows="0.9fr 0.1fr 0.5fr 0.14fr 1fr auto"
+                    gridTemplateRows="0.9fr 0.1fr 0.5fr 0.07fr 1fr auto"
                     paddingLeft="12%"
                     maxWidth="75%"
                 >
