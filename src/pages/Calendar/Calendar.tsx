@@ -21,15 +21,8 @@ function Calendar() {
             height={"80vh"}
             plugins={[dayGridPlugin]}
             initialView="dayGridMonth"
-            events={[
-              { title: "event 1", date: "2024-11-11" },
-              { title: "event 1", date: "2024-11-11" },
-              {
-                title: "Multi-Day Event",
-                start: "2024-11-14",
-                end: "2024-11-20",
-              },
-            ]}
+            dayHeaderFormat={{ weekday: 'narrow' }}
+            events={[]}
           />
         </Box>
       </Grid>
