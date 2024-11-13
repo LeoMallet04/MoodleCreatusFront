@@ -3,15 +3,21 @@ import Card, { CardProps } from "../../components/base/Card/Card"
 import { Box, Flex, Text, Grid } from "@chakra-ui/react";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 import { useEffect, useState } from "react";
-
+import axios from 'axios';
 function Home() {
 
     const [cards, setCards] = useState<CardProps[]>([]);
-
+    const token = document.cookie.split('=')[1];
     useEffect(() => {
-        fetch('http://localhost:3000/cards')
-            .then(res => res.json())
-            .then(data => {
+        axios.get('http://localhost:3000/cards', {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            withCredentials: true
+        })
+            .then(response => {
+                const data = response.data;
                 data.sort((a: CardProps, b: CardProps) => {
                     if (a.isBlocked && !b.isBlocked) {
                         return 1;
@@ -19,12 +25,12 @@ function Home() {
                     if (!a.isBlocked && b.isBlocked) {
                         return -1;
                     }
-                })
-                setCards(data)
+                    return 0;
+                });
+                setCards(data);
             })
-            .catch((error) => console.error('Error fetching data: ' + error));
-    }, [])
-
+            .catch(error => console.error('Error fetching data: ' + error));
+    }, [token]);
     return (
         <Box overflowX={"hidden"}>
             <SideBar />
