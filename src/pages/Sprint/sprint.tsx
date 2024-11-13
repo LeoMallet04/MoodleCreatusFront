@@ -33,16 +33,16 @@ function Sprint() {
                             para introduzir manipulação de eventos e lógica de programação, além de consolidar conhecimentos em desenvolvimento web.
                         </Text>
                     </Box>
-                    <Text backgroundColor="white" width="70vw" height="0.1vh" marginBottom="1vh" padding="0"></Text>
+                    <Text backgroundColor="white" width="100%" height="0.1vh" marginBottom="1vh" padding="0"></Text>
                     <Box marginBottom="0">
                         <Text fontSize="2em">Projeto</Text>
                         <Text fontSize="1em">Projeto.pdf</Text>
                     </Box>
-                    <Box backgroundColor="white" width="70vw" height="0.1vh" marginTop="1vh"></Box>
-                    <Box>
+                    <Box backgroundColor="white" width="100%" height="0.1vh" marginTop="1vh"></Box>
+                    <Box justifySelf={"left"}>
                         <Text fontSize="2em">Materiais</Text>
-                        <Box width="75vw"  marginTop="1vh">
-                            <Swiper
+                        <Box width="75vw"  marginTop="1vh" paddingRight={"50px"}>
+                            <Swiper    
                                 spaceBetween={"10%"} // Espaço entre slides
                                 modules={[Navigation, Autoplay]} // Adicionando Autoplay ao Swiper
                                 slidesPerView={3}
@@ -50,9 +50,9 @@ function Sprint() {
                                 autoplay={{ delay: 3000, disableOnInteraction: false }} // Configurações de autoplay
                                 onSlideChange={() => console.log('slide change')}
                                 onSwiper={(swiper) => console.log(swiper)}
-                                style={{ overflow: "hidden" }} // Garantir que o swiper não afeta o layout externo
+                                style={{ overflow: "hidden"}} // Garantir que o swiper não afeta o layout externo
                             >
-                                <SwiperSlide>
+                                <SwiperSlide >
                                     <Card title="HTML em 48 horas" url="https://youtube.com" />
                                 </SwiperSlide>
                                 <SwiperSlide>
@@ -64,8 +64,6 @@ function Sprint() {
                                 <SwiperSlide>
                                     <Card title="JavaScript para Iniciantes" url="https://youtube.com" />
                                 </SwiperSlide>
-                                
-                                
                             </Swiper>
                         </Box>
                     </Box>
