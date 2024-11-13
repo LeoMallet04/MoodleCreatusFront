@@ -64,6 +64,7 @@ function Calendar() {
             plugins={[dayGridPlugin]}
             initialView="dayGridMonth"
             events={events}
+            dayHeaderFormat={{ weekday: 'narrow' }}
           />
         </Box>
       </Grid>
