@@ -5,6 +5,7 @@ import NavBar from "@/components/base/NavBar/NavBar";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 import { useEffect, useState } from "react";
 import { EventSourceInput } from "@fullcalendar/core/index.js";
+import axios from "axios";
 
 
 type Evento = {
@@ -18,9 +19,9 @@ function Calendar() {
   const [events, setEvents] = useState<EventSourceInput>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/event/upcoming/now')
-      .then(res => res.json())
-      .then(data => {
+    axios.get('http://localhost:3000/event/upcoming/now', { withCredentials: true })
+      .then(res => {
+        const data = res.data;
         data.forEach((event: Evento, index: number) => {
           if (event.start_date == event.end_date) {
             data[index] = {
