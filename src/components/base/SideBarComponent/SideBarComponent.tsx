@@ -15,6 +15,7 @@ function SideBar() {
     const location = useLocation();
 
     const isHomeActive = location.pathname === '/home';
+    const isCalendarActive = location.pathname === '/calendar'
 
     return (
         <Grid
@@ -82,7 +83,7 @@ function SideBar() {
                 </Button>
 
                 <Button
-                    bg="transparent"
+                    bg={isCalendarActive ? "#2E23A7" : "transparent"}
                     borderRadius="45px"
                     minH="2.5rem"
                     width={isOpen ? "100%" : "1rem"}
