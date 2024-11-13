@@ -7,7 +7,7 @@ import Textura from "../../../assets/images/Textura.png";
 import { useState } from "react";
 
 
-interface CardProps {
+export interface CardProps {
     title : string;
     url: string;
     isBlocked?: boolean;
