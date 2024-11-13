@@ -17,9 +17,15 @@ type Evento = {
 function Calendar() {
 
   const [events, setEvents] = useState<EventSourceInput>([]);
+  const token = document.cookie.split('=')[1];
 
   useEffect(() => {
-    axios.get('http://localhost:3000/event/upcoming/now', { withCredentials: true })
+    axios.get('http://localhost:3000/event/upcoming/now', {
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .then(res => {
         const data = res.data;
         data.forEach((event: Evento, index: number) => {
