@@ -17,7 +17,8 @@ function Card({ url, isBlocked = false,title }: CardProps) {
 
     function handleClick() {
         if (isBlocked) return
-        navigate(url);
+        window.location.href = url;
+        //navigate(url);
     };
 
     return (
