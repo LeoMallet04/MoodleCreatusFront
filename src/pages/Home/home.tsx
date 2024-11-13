@@ -7,9 +7,15 @@ import { useEffect, useState } from "react";
 function Home() {
 
     const [cards, setCards] = useState<CardProps[]>([]);
-
+    const token = document.cookie.split('=')[1];
     useEffect(() => {
-        fetch('http://localhost:3000/cards')
+        fetch('http://localhost:3000/cards', {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+            credentials: 'include'
+        })
             .then(res => res.json())
             .then(data => {
                 data.sort((a: CardProps, b: CardProps) => {
