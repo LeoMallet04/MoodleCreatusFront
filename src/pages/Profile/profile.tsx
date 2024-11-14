@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { Flex, HStack, Stack, Text, Grid, GridItem} from "@chakra-ui/react";
+import { useState} from "react";
+import { Flex, HStack, Stack, Text, Grid, GridItem } from "@chakra-ui/react";
 import { Avatar } from "@/components/ui/avatar";
 import SideBar from "@/components/base/SideBarComponent/SideBarComponent";
 import NavBar from "@/components/base/NavBar/NavBar";
 import DadosComponent from "./components/DadosComponent";
 import ProjetoList from "./components/ProjetoList";
 
-const username = "LeoMallet04"
 
 interface User {
     id: string;
@@ -18,47 +17,43 @@ interface User {
 
 const authenticatedUser: User = {
     id: "1",
-    name: "Nome Usuario",
-    email: "email@example.com",
+    name: "LeoMallet04",
+    email: "pedro@gmail.com",
     avatar: "",
 };
 
 
 //trocar para uma função que exiba uma lista dos projetos
 //API que puxa projeto do github - variaveis necessarias: nome do usuario e nome do projeto
-const projects = [
-    { title: "Calculadora", description: "Breve descrição do projeto de Calculadora", tags: ["CSS", "HTML", "JavaScript"] },
-    { title: "Conversor de Moedas", description: "Breve descrição do projeto de Conversor de Moedas", tags: ["React", "API", "JavaScript"] },
-    { title: "Portfolio", description: "Breve descrição do projeto de Portfolio", tags: ["React", "Chakra UI", "TypeScript"] },
-];
 
 const Profile: React.FC = () => {
     const [showCards, setShowCards] = useState(false);
-
+    
     const handleAccordionClick = () => {
         setShowCards((prev) => !prev);
     };
 
-    return (
-        
 
-        
-            <Flex direction="column" width="100vw" height="100vh" overflowX="hidden" bg={"#021823"}>
-            <NavBar/>
+    return (
+
+
+
+        <Flex direction="column" width="100vw" height="100vh" overflowX="hidden" bg={"#021823"}>
+            <NavBar />
             <Flex zIndex={10} position="fixed" top={0} left={0} height="100vh">
-                <SideBar/>
-                
+                <SideBar />
+
                 <Grid
-                     templateColumns={{ base: "1fr", md: "1fr 1fr" }}
-                     position="relative"
-                     top={{ base: 24, md: 10 }}
-                     left={{ base: 4, md: 40 }}
-                     alignItems="center"
-                     width={{ base: "calc(100vw - 8px)", md: "calc(100vw - 60px)" }}
-                     gap={5}
-                     p={{ base: 4, md: 0 }}
+                    templateColumns={{ base: "1fr", md: "1fr 1fr" }}
+                    position="relative"
+                    top={{ base: 24, md: 10 }}
+                    left={{ base: 4, md: 40 }}
+                    alignItems="center"
+                    width={{ base: "calc(100vw - 8px)", md: "calc(100vw - 60px)" }}
+                    gap={5}
+                    p={{ base: 4, md: 0 }}
                 >
-                <GridItem>
+                    <GridItem>
                         <HStack gap={4} align="center" marginLeft={"6%"}>
                             <Avatar
                                 name={authenticatedUser.name}
@@ -86,19 +81,19 @@ const Profile: React.FC = () => {
                                 <DadosComponent
                                     curso="Engenharia de Software"
                                     email="exemplo@gmail.com"
-                                    github="Username"
+                                    github="LeoMallet04"
                                     faltas={0}
                                 ></DadosComponent>
-                               
+
                             </Stack>
                         </HStack>
 
                     </GridItem>
-
-                    <ProjetoList handleAccordionClick={handleAccordionClick} showCards={showCards} username={username}></ProjetoList>
+                        
+                    <ProjetoList  handleAccordionClick={handleAccordionClick} showCards={showCards} user_email={authenticatedUser.email}></ProjetoList>
 
                 </Grid>
-                   
+
             </Flex>
         </Flex>
 
