@@ -32,12 +32,11 @@ function Sprint() {
         axios.get(`http://localhost:3000/cards/${sprint}`, {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            }, withCredentials: true
         }).then(response => {
             setSprintInfo(response.data);
-        })
-        console.log(sprintInfo);
-    }, []);
+        }).catch(error => console.error('Error fetching data: ' + error));
+    }, [sprint]);
 
     return (
         <Flex
