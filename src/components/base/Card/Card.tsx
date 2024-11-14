@@ -8,14 +8,16 @@ import { useState } from "react";
 
 
 export interface CardProps {
-    title : string;
+    index?: number;
+    title: string;
     url: string;
+    isSprint?: boolean;
     isBlocked?: boolean;
-    image: string;
+    image?: string;
 }
 
 
-function Card({ title, url, isBlocked = false, image }: CardProps) {
+function Card({ index, title, url, isBlocked = false, image, isSprint = false }: CardProps) {
 
 
     const navigate = useNavigate();
@@ -25,7 +27,8 @@ function Card({ title, url, isBlocked = false, image }: CardProps) {
 
     function handleClick() {
         if (isBlocked) return
-        navigate(url);
+        window.location.href = isSprint ? `/sprint?sprint=${index ? index + 1 : 1}` : url;
+        //navigate(url);
     };
 
     return (
@@ -36,8 +39,8 @@ function Card({ title, url, isBlocked = false, image }: CardProps) {
             transition={"0.3s"}
             style={{ transform: hover ? "scale(1.1)" : "scale(1)" }}
             backgroundImage={`url(${image ? (isBlocked ? Textura : image) : Textura})`}
-            width={{base:"180px",sm:"200px",md:"250px"}}
-            height={{base:"100px",sm:"120px",md:"150px"}}
+            width={{ base: "180px", sm: "200px", md: "250px" }}
+            height={{ base: "100px", sm: "120px", md: "150px" }}
             alignItems={"end"}
             borderRadius={"10px"}
             onClick={handleClick}
