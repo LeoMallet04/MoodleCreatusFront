@@ -4,16 +4,24 @@ import { useNavigate } from "react-router-dom";
 import { Image } from "@chakra-ui/react";
 import cadeado from "../../../assets/icons/cadeado.png";
 import Textura from "../../../assets/images/Textura.png";
+import { useState } from "react";
 
-interface CardProps {
+
+export interface CardProps {
     title : string;
     url: string;
     isBlocked?: boolean;
+    image: string;
 }
 
-function Card({ url, isBlocked = false,title }: CardProps) {
+
+function Card({ title, url, isBlocked = false, image }: CardProps) {
+
 
     const navigate = useNavigate();
+    const [hover, setHover] = useState(false);
+
+
 
     function handleClick() {
         if (isBlocked) return
@@ -22,14 +30,20 @@ function Card({ url, isBlocked = false,title }: CardProps) {
 
     return (
         <Flex
-            backgroundImage={Textura}
-            width={"250px"}
-            height={"150px"}
+
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            transition={"0.3s"}
+            style={{ transform: hover ? "scale(1.1)" : "scale(1)" }}
+            backgroundImage={`url(${image ? (isBlocked ? Textura : image) : Textura})`}
+            width={{base:"180px",sm:"200px",md:"250px"}}
+            height={{base:"100px",sm:"120px",md:"150px"}}
             alignItems={"end"}
             borderRadius={"10px"}
             onClick={handleClick}
             cursor={isBlocked ? "not-allowed" : "pointer"}
             position={"relative"}
+
         >
             <Box
                 backgroundColor={"#2E23A7"}
@@ -52,7 +66,7 @@ function Card({ url, isBlocked = false,title }: CardProps) {
                 alignItems={"center"}
                 borderRadius={"10px"}
                 pb={"35px"}
-                style={{display: isBlocked ? "flex" : "none"}}
+                style={{ display: isBlocked ? "flex" : "none" }}
             >
                 <Image src={cadeado}></Image>
             </Flex>
