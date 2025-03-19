@@ -53,11 +53,9 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                 var user = url[3];
 
                 const gitDto = await getReposData(user,newProject.title);
-                    // if(gitDto){
-                    //     console.log(`Repo_Name: ${gitDto.repo_name} | Repo_Descriptions: ${gitDto.repo_description}`);
-                    // }else{
-                    //     console.log("Dados não foram carregados corretamente")
-                    // }
+                    if(!gitDto){
+                    alert("Certifique-se de inserir o nome do seu repositório no GitHub, bem como o link para o repositório");
+                    }
                 
 
                 if(newProject.title && newProject.sprint && newProject.link && gitDto){
