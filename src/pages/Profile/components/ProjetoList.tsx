@@ -3,6 +3,7 @@ import { AccordionItem, AccordionItemTrigger, AccordionRoot } from "@/components
 import { FaRegPlusSquare } from "react-icons/fa";
 import {useState } from "react";
 import axios from "axios";
+import { getReposData} from "@/utils/apiGit.js";
 
 
 interface Project {
@@ -69,14 +70,36 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                     }
                     setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "" });
 
-            } catch (error) {
-                setError("Erro ao adicionar o projeto. Tente novamente.");
+
+                    // const getProject = await axios.get("https://localhost:3000/project/1",   {
+                    //     headers: {Authorization: `Berear ${token}`},
+                    //     withCredentials: true   
+                    // });
+
+                    // console.log(getProject.data);
+
+                    
+                    const gitDto = await getReposData("LeoMallet04","Calculator");
+                    if(gitDto){
+                        console.log(`Repo_Name: ${gitDto.repo_name} | Repo_Descriptions: ${gitDto.repo_description}`);
+                    }else{
+                        console.log("Dados não foram carregados corretamente")
+                    }
+                
+
+
+                }else{
+                    setError("Preencha todos os campos corretamente.")
+                }
+            } catch (err: any) {
+                if (axios.isAxiosError(err)) {
+                    console.error("Erro:", err.response?.data?.message || "Erro desconhecido");
+                } else {
+                    console.error("Erro desconhecido.");
+                }
             }
-        }else {
-            setError("Preencha todos os campos corretamente.");
+            
         }
-    }
-    
     
     const handleAddProjectBoxToggle = () => {
         setAddProjectBoxVisible(!addProjectBoxVisible);
@@ -213,77 +236,77 @@ export default ProjetoList;
 
 
 // const [data, setData] = useState<any>(null);
-    // const [languagesUrl, setLanguages] = useState<string[]>([]);
-    // const [error, setError] = useState<string | null>(null);
+//     const [languagesUrl, setLanguages] = useState<string[]>([]);
+//     const [error, setError] = useState<string | null>(null);
 
 
-    // async function getReposData({ repoName, user }: { repoName: string; user: string }) {
-    //     try {
-    //         const response = await axios.get(`https://api.github.com/repos/${user}/${repoName}`);
-    //         return response.data;
-    //     } catch (error) {
-    //         if (axios.isAxiosError(error) && error.response?.status === 404) {
-    //          setError("Repositório não encontrado. Verifique o nome do repositório e o nome do usuário.");
-    //         } else {
-    //          setError("Ocorreu um erro ao buscar os dados do repositório.");
-    //         }
-    //         return null;
-    //     }
-    // }
+//     async function getReposData({ repoName, user }: { repoName: string; user: string }) {
+//         try {
+//             const response = await axios.get(`https://api.github.com/repos/${user}/${repoName}`);
+//             return response.data;
+//         } catch (error) {
+//             if (axios.isAxiosError(error) && error.response?.status === 404) {
+//              setError("Repositório não encontrado. Verifique o nome do repositório e o nome do usuário.");
+//             } else {
+//              setError("Ocorreu um erro ao buscar os dados do repositório.");
+//             }
+//             return null;
+//         }
+//     }
     
-    // async function getRepoLanguages(url: string) {
-    //     try {
-    //         const response = await axios.get(url);
-    //         console.log()
-    //         return response.data;
-    //     } catch (error) {
-    //         setError("Ocorreu um erro ao buscar as linguagens do repositório.");
-    //         throw error;
-    //     }
-    // }
+//     async function getRepoLanguages(url: string) {
+//         try {
+//             const response = await axios.get(url);
+//             console.log()
+//             return response.data;
+//         } catch (error) {
+//             setError("Ocorreu um erro ao buscar as linguagens do repositório.");
+//             throw error;
+//         }
+//     }
 
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //             try {
-    //                 const data = await getReposData({ repoName: newRepo, user: username });
-    //                 console.log("Data 1:", data);   
-    //                 setData(data);
-    //                 if (data.languages_url) {
+//     useEffect(() => {
+//         const fetchData = async () => {
+//                 try {
+//                     const data = await getReposData({ repoName: newRepo, user: username });
+//                     console.log("Data 1:", data);   
+//                     setData(data);
+//                     if (data.languages_url) {
                        
-    //                     const languagesData = await getRepoLanguages(data.languages_url);
-    //                     console.log("Languages Data: ", languagesData);
-    //                     setLanguages(Object.keys(languagesData));
-    //                     console.log("Languages: ", languagesUrl);
-    //                 }
-    //             } catch (error) {
-    //                 console.log("Não foi possível buscar os dados do repositório.", error);
-    //             }
-    //     };
+//                         const languagesData = await getRepoLanguages(data.languages_url);
+//                         console.log("Languages Data: ", languagesData);
+//                         setLanguages(Object.keys(languagesData));
+//                         console.log("Languages: ", languagesUrl);
+//                     }
+//                 } catch (error) {
+//                     console.log("Não foi possível buscar os dados do repositório.", error);
+//                 }
+//         };
 
-    //     fetchData();
-    // }, [newRepo, username]);
+//         fetchData();
+//     }, [newRepo, username]);
     
 
-    // const addProject = async (): Promise<void> => {
-    //     console.log("Title:", newProject.title," Type:",newProject.type," Description:",newProject.description," Languages:",languagesUrl);
-    //     if (data && newProject.title && newProject.type) { 
-    //         try {
-    //             const repoData = await getReposData({ repoName: newRepo, user: username });
-    //             newProject.description = data.description;
-    //             projects.push({
-    //                 title: newProject.title,
-    //                 type: newProject.type,
-    //                 description: newProject.description,
-    //                 languages: languagesUrl
-    //             });
+//     const addProject = async (): Promise<void> => {
+//         console.log("Title:", newProject.title," Type:",newProject.type," Description:",newProject.description," Languages:",languagesUrl);
+//         if (data && newProject.title && newProject.type) { 
+//             try {
+//                 const repoData = await getReposData({ repoName: newRepo, user: username });
+//                 newProject.description = data.description;
+//                 projects.push({
+//                     title: newProject.title,
+//                     type: newProject.type,
+//                     description: newProject.description,
+//                     languages: languagesUrl
+//                 });
                 
-    //             setNewProject({ title: "", type: 0, description: "", languages: [] });
-    //             setNewRepo("");
-    //             setError(null);
+//                 setNewProject({ title: "", type: 0, description: "", languages: [] });
+//                 setNewRepo("");
+//                 setError(null);
                 
-    //         } catch (error) {
+//             } catch (error) {
                 
-    //         }
-    //     }
-    // };
+//             }
+//         }
+//     };
