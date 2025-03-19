@@ -25,28 +25,50 @@ const projects: Project[] = [];
 function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoListProps) {
     const [addProjectBoxVisible, setAddProjectBoxVisible] = useState(false);
     const [newProject, setNewProject] = useState({ title: "", sprint: 0, description: "", link: "", user_email: "" });
-    const [error, setError] = useState<string | null>(null);
-    const addProject = async (): Promise<void> => {
-        if(newProject.title && newProject.sprint && newProject.link) {
-            
+        const [error, setError] = useState<string | null>(null);
+        const addProject = async (): Promise<void> => {
+            user_email = "leonardoms.2010@hotmail.com";
             try {
-                
-                const response = await axios.post(API_URL,{
-                    link: newProject.link,
-                    title: newProject.title,
-                    description: newProject.description,
-                    sprint: newProject.sprint,
-                    user_email: user_email
+                // 🔹 1. Fazer login (o JWT será salvo no cookie automaticamente)
+                await axios.post("http://localhost:3000/auth/login", {
+                    email: "leonardoms.2010@hotmail.com",
+                    password: "12345"
+                }, { withCredentials: true });
+            
+                console.log("Login realizado com sucesso!");
+            
+                // 🔹 2. Buscar perfil (o cookie JWT será enviado automaticamente)
+                const profileResponse = await axios.get("http://localhost:3000/auth/profile", {
+                    withCredentials: true // 🔥 Isso garante que o cookie seja enviado
                 });
+
+                const token = profileResponse.headers.cookie;
+            
+                console.log("Perfil encontrado com sucesso!", profileResponse.data);
                 
-    
-                if (response.status === 201) {
-                    projects.push(newProject);
+                if(newProject.title && newProject.sprint && newProject.link){
+                    const response = await axios.post(API_URL,{
+                        link: newProject.link,
+                        title: newProject.title,
+                        description: newProject.description,
+                        sprint: newProject.sprint,
+                        user_email: user_email
+                    },
+                    {
+                        headers: {Authorization: `Berear ${token}`},
+                        withCredentials: true   
+                    });
+                    console.log(newProject);
+        
+                    if (response.status === 201) {
+                        projects.push(newProject);
+                        setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "" });
+                        setError(null);
+                    }else{
+                        setError("Erro ao adicionar o projeto. Tente novamente.");
+                    }
                     setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "" });
-                    setError(null);
-                }
-                setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "" });
-                
+
             } catch (error) {
                 setError("Erro ao adicionar o projeto. Tente novamente.");
             }
