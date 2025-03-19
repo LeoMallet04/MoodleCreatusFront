@@ -4,6 +4,7 @@ import { FaRegPlusSquare } from "react-icons/fa";
 import {useState } from "react";
 import axios from "axios";
 import { getReposData} from "@/utils/apiGit.js";
+import LanguageBox from "./LanguagesBox";
 
 
 interface Project {
@@ -22,6 +23,7 @@ interface ProjetoListProps {
 
 const API_URL = "http://localhost:3000/project";
 const projects: Project[] = [];
+var languages: string[] = [];
 
 function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoListProps) {
     const [addProjectBoxVisible, setAddProjectBoxVisible] = useState(false);
@@ -46,8 +48,21 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                 const token = profileResponse.headers.cookie;
             
                 console.log("Perfil encontrado com sucesso!", profileResponse.data);
+
+                var url = newProject.link.split("/");
+                var user = url[3];
+
+                const gitDto = await getReposData(user,newProject.title);
+                    // if(gitDto){
+                    //     console.log(`Repo_Name: ${gitDto.repo_name} | Repo_Descriptions: ${gitDto.repo_description}`);
+                    // }else{
+                    //     console.log("Dados não foram carregados corretamente")
+                    // }
                 
-                if(newProject.title && newProject.sprint && newProject.link){
+
+                if(newProject.title && newProject.sprint && newProject.link && gitDto){
+                    languages = gitDto.repo_languages;
+                    newProject.description = gitDto.repo_description;
                     const response = await axios.post(API_URL,{
                         link: newProject.link,
                         title: newProject.title,
@@ -79,13 +94,7 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                     // console.log(getProject.data);
 
                     
-                    const gitDto = await getReposData("LeoMallet04","Calculator");
-                    if(gitDto){
-                        console.log(`Repo_Name: ${gitDto.repo_name} | Repo_Descriptions: ${gitDto.repo_description}`);
-                    }else{
-                        console.log("Dados não foram carregados corretamente")
-                    }
-                
+                    
 
 
                 }else{
@@ -169,15 +178,6 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                                     height={"5vh"}
                                 />
                                 <Input
-                                    placeholder="Descrição do projeto (opcional)"
-                                    name="description"
-                                    value={newProject.description}
-                                    onChange={handleInputChange}
-                                    mb={2}
-                                    width={"100%"}
-                                    height={"5vh"}
-                                />
-                                <Input
                                     placeholder="Link do Projeto"
                                     name="link"
                                     value={newProject.link}
@@ -210,12 +210,15 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                             bg="rgba(255, 255, 255, 0.05)"
                             borderColor="rgba(255, 255, 255, 0.12)"
                             h={project.description ? "auto" : "120px"}                         >
-                            <Text fontFamily="Inter" fontWeight="bold" fontSize="xl" color="#4175A6" mb={2}>
-                                {project.title}
+                            <Flex
+                            flexDirection="row" justifyContent="space-between">
+                                <Text fontFamily="Inter" fontWeight="bold" fontSize="xl" color="#4175A6" mb={2}>
+                                    {project.title}
+                                </Text>
+                                <Text fontFamily="Inter" fontSize="small" color="#C2CFD9" mb={2} fontWeight="bold" mr={5}>
+                                {"Sprint  " +project.sprint}
                             </Text>
-                            <Text fontFamily="Inter" fontSize="small" color="#C2CFD9" mb={2}>
-                                {project.sprint}
-                            </Text>
+                            </Flex>
                             {project.description && (
                                 <Text fontFamily="Inter" fontSize="small" color="#C2CFD9" mb={4}>
                                     {project.description}
@@ -224,6 +227,14 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                             <Text fontFamily="Inter" fontSize="small" color="#C2CFD9" mb={4}>
                                 {project.link}
                             </Text>
+
+                            <Flex flexDirection="row">
+                            {languages.map((language, index) => (
+                                <LanguageBox key={index} language={language} /> 
+                                ))}
+
+                            </Flex>
+                            
                         </Box>
                     ))}
                 </Grid>

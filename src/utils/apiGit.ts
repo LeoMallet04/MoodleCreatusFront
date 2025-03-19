@@ -4,6 +4,7 @@ interface GitDTO {
   repo_name: string;
   repo_description: string;
   repo_languages: string[];
+  repo_url: string;
 }
 
 async function getReposData(user_name: string, repo_name: string): Promise<GitDTO | null> {
@@ -21,15 +22,18 @@ async function getReposData(user_name: string, repo_name: string): Promise<GitDT
     const repo_name = json_data.name ?? "";
     const repo_description = json_data.description ?? "";
     const repo_languages = await getLanguageData(json_data.languages_url);
+    const repo_url = json_data.html_url ?? "";
 
     console.log(`Nome do repositório: ${repo_name}`);
     console.log(`Descrição: ${repo_description}`);
     console.log(`Linguagens: ${repo_languages.join(", ")}`);
+    console.log(`Url do Repositório:  ${repo_url}`);
 
     return {
       repo_name,
       repo_description,
-      repo_languages
+      repo_languages,
+      repo_url
     };
   } catch (error) {
     console.error("Erro ao buscar os dados do repositório:", error);
