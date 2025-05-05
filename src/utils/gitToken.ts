@@ -10,7 +10,7 @@ export interface GitToken {
 //Pegamos o token do GitHub APP pelo endpoint do BackEnd
 async function getGitToken(): Promise<GitToken | undefined>{
     try {
-        const response = await axios.post('http://localhost:3000/git-token/access-personal-token',
+        const response = await axios.post('http://localhost:3000/git-token/access-app-token',
             {},
             {
                 withCredentials: true
