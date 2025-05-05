@@ -72,4 +72,24 @@ async function getLanguageData(languages_url: string): Promise<string[]> {
   }
 }
 
-export {getLanguageData, getReposData}
+async function getLanguagesColor(languages:string[]): Promise<Record<string,string> | undefined>{
+  const languages_colors: Record<string, string> = {};
+
+  try {
+    const response_colors = await axios.get(URL_COLORS);
+    const response_colors_data = response_colors.data;
+
+    languages.forEach((language) => {
+      languages_colors[language] = response_colors_data.language.color;
+    });
+    
+    console.log(languages_colors);
+    return languages_colors;
+
+  } catch (error) {
+    console.log("Erro ao mapear as linguagens para o dicionário: ", error);
+  }
+  
+}
+
+export {getLanguageData, getReposData, getLanguagesColor}
