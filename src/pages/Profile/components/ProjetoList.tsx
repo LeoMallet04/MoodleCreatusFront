@@ -1,9 +1,9 @@
-import { Badge, Box, GridItem, HStack, Text, Flex, Stack, Button, Input, Grid } from "@chakra-ui/react";
+import {Box, GridItem, HStack, Text, Flex, Button, Input, Grid } from "@chakra-ui/react";
 import { AccordionItem, AccordionItemTrigger, AccordionRoot } from "@/components/ui/accordion";
 import { FaRegPlusSquare } from "react-icons/fa";
 import {useState } from "react";
 import axios from "axios";
-import { getReposData} from "@/utils/apiGit.js";
+import { getLanguagesColor, getReposData} from "@/utils/GitAPI/apiGit.js";
 import LanguageBox from "./LanguagesBox";
 
 
@@ -12,7 +12,8 @@ interface Project {
     sprint: number;
     description: string | null;
     link: string;
-    user_email: string,
+    user_email: string;
+    languages: string[];
 }
 
 interface ProjetoListProps {
@@ -21,77 +22,73 @@ interface ProjetoListProps {
     user_email: string;
 }
 
+export interface LanguageColorsDTO {
+    languageColors: Record<string,string> | null;
+    projectId:  string;
+}
+
 const API_URL = "http://localhost:3000/project";
 const projects: Project[] = [];
-var languages: string[] = [];
 
 function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoListProps) {
     const [addProjectBoxVisible, setAddProjectBoxVisible] = useState(false);
-    const [newProject, setNewProject] = useState({ title: "", sprint: 0, description: "", link: "", user_email: "" });
-        const [error, setError] = useState<string | null>(null);
-        const addProject = async (): Promise<void> => {
+    const [newProject, setNewProject] = useState<Project>({ title: "", sprint: 0, description: "", link: "", user_email: "" , languages: []});
+    const [error, setError] = useState<string | null>(null);
+    const [languagesColorsDTO, setLanguagesColorsDTO] = useState<LanguageColorsDTO>();
+
+    const addProject = async (): Promise<void> => {
             user_email = "leonardoms.2010@hotmail.com";
             try {
-                // 🔹 1. Fazer login (o JWT será salvo no cookie automaticamente)
-                await axios.post("http://localhost:3000/auth/login", {
-                    email: "leonardoms.2010@hotmail.com",
-                    password: "12345"
-                }, { withCredentials: true });
-            
-                console.log("Login realizado com sucesso!");
-            
-                // 🔹 2. Buscar perfil (o cookie JWT será enviado automaticamente)
-                const profileResponse = await axios.get("http://localhost:3000/auth/profile", {
-                    withCredentials: true // 🔥 Isso garante que o cookie seja enviado
-                });
-
-                const token = profileResponse.headers.cookie;
-            
-                console.log("Perfil encontrado com sucesso!", profileResponse.data);
-
+               
                 var url = newProject.link.split("/");
                 var user = url[3];
 
                 const gitDto = await getReposData(user,newProject.title);
                     if(!gitDto){
-                    alert("Certifique-se de inserir o nome do seu repositório no GitHub, bem como o link para o repositório");
-                    }
+                    alert("Certifique-se de inserir o nome do seu repositório no GitHub e o link para o repositório");
+                }
                 
-
+                //Checa se os valores do NewProject são valores que já foraminicializados
                 if(newProject.title && newProject.sprint && newProject.link && gitDto){
-                    languages = gitDto.repo_languages;
                     newProject.description = gitDto.repo_description;
+                    newProject.languages = gitDto.repo_languages
                     const response = await axios.post(API_URL,{
                         link: newProject.link,
                         title: newProject.title,
                         description: newProject.description,
                         sprint: newProject.sprint,
-                        user_email: user_email
+                        user_email: user_email,
+                        languages: gitDto.repo_languages,
                     },
                     {
-                        headers: {Authorization: `Berear ${token}`},
                         withCredentials: true   
                     });
                     console.log(newProject);
         
                     if (response.status === 201) {
+                        const colors = await getLanguagesColor(gitDto.repo_languages);
+
+                        const colorsDTO: LanguageColorsDTO = {
+                            languageColors: colors,
+                            projectId: gitDto.repo_name,
+                        }
+
+                        setLanguagesColorsDTO(colorsDTO);
+                        localStorage.setItem(`language_colors_${gitDto.repo_name}`, JSON.stringify(colorsDTO));
                         projects.push(newProject);
-                        setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "" });
+                        setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "", languages: [] });
                         setError(null);
                     }else{
                         setError("Erro ao adicionar o projeto. Tente novamente.");
                     }
-                    setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "" });
+                    setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "", languages: [] });
 
 
                     // const getProject = await axios.get("https://localhost:3000/project/1",   {
-                    //     headers: {Authorization: `Berear ${token}`},
                     //     withCredentials: true   
                     // });
 
                     // console.log(getProject.data);
-
-                    
                     
 
 
@@ -227,8 +224,8 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                             </Text>
 
                             <Flex flexDirection="row">
-                            {languages.map((language, index) => (
-                                <LanguageBox key={index} language={language} /> 
+                            {project.languages.map((language, index) => (
+                                <LanguageBox key={index} language={language} colorsDTO={languagesColorsDTO ?? null} /> 
                                 ))}
 
                             </Flex>
@@ -242,80 +239,3 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
 }
 
 export default ProjetoList;
-
-
-// const [data, setData] = useState<any>(null);
-//     const [languagesUrl, setLanguages] = useState<string[]>([]);
-//     const [error, setError] = useState<string | null>(null);
-
-
-//     async function getReposData({ repoName, user }: { repoName: string; user: string }) {
-//         try {
-//             const response = await axios.get(`https://api.github.com/repos/${user}/${repoName}`);
-//             return response.data;
-//         } catch (error) {
-//             if (axios.isAxiosError(error) && error.response?.status === 404) {
-//              setError("Repositório não encontrado. Verifique o nome do repositório e o nome do usuário.");
-//             } else {
-//              setError("Ocorreu um erro ao buscar os dados do repositório.");
-//             }
-//             return null;
-//         }
-//     }
-    
-//     async function getRepoLanguages(url: string) {
-//         try {
-//             const response = await axios.get(url);
-//             console.log()
-//             return response.data;
-//         } catch (error) {
-//             setError("Ocorreu um erro ao buscar as linguagens do repositório.");
-//             throw error;
-//         }
-//     }
-
-
-//     useEffect(() => {
-//         const fetchData = async () => {
-//                 try {
-//                     const data = await getReposData({ repoName: newRepo, user: username });
-//                     console.log("Data 1:", data);   
-//                     setData(data);
-//                     if (data.languages_url) {
-                       
-//                         const languagesData = await getRepoLanguages(data.languages_url);
-//                         console.log("Languages Data: ", languagesData);
-//                         setLanguages(Object.keys(languagesData));
-//                         console.log("Languages: ", languagesUrl);
-//                     }
-//                 } catch (error) {
-//                     console.log("Não foi possível buscar os dados do repositório.", error);
-//                 }
-//         };
-
-//         fetchData();
-//     }, [newRepo, username]);
-    
-
-//     const addProject = async (): Promise<void> => {
-//         console.log("Title:", newProject.title," Type:",newProject.type," Description:",newProject.description," Languages:",languagesUrl);
-//         if (data && newProject.title && newProject.type) { 
-//             try {
-//                 const repoData = await getReposData({ repoName: newRepo, user: username });
-//                 newProject.description = data.description;
-//                 projects.push({
-//                     title: newProject.title,
-//                     type: newProject.type,
-//                     description: newProject.description,
-//                     languages: languagesUrl
-//                 });
-                
-//                 setNewProject({ title: "", type: 0, description: "", languages: [] });
-//                 setNewRepo("");
-//                 setError(null);
-                
-//             } catch (error) {
-                
-//             }
-//         }
-//     };
