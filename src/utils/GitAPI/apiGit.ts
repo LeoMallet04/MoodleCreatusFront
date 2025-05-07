@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const BASE_URL = "https://api.github.com/repos";
-const URL_COLORS = "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json";
 
 interface GitDTO {
   repo_name: string;
@@ -34,6 +33,7 @@ async function getReposData(user_name: string, repo_name: string): Promise<GitDT
       repo_url: data.repo_url,
     };
 
+
     return gitDto;
   
   } catch (error) {
@@ -43,24 +43,25 @@ async function getReposData(user_name: string, repo_name: string): Promise<GitDT
 }
 
 
-async function getLanguagesColor(languages:string[]): Promise<Record<string,string> | undefined>{
+async function getLanguagesColor(languages: string[]): Promise<Record<string, string> | null> {
   const languages_colors: Record<string, string> = {};
 
-  try {
-    const response_colors = await axios.get(URL_COLORS);
-    const response_colors_data = response_colors.data;
+      const response_colors = await fetch('src/utils/colors.json');
+      
+      if (!response_colors.ok) {
+        return null;
+      }
 
-    languages.forEach((language) => {
-      languages_colors[language] = response_colors_data.language.color;
-    });
-    
-    console.log(languages_colors);
-    return languages_colors;
+      const colorsData = await response_colors.json();
 
-  } catch (error) {
-    console.log("Erro ao mapear as linguagens para o dicionário: ", error);
-  }
-  
+      languages.forEach((language) => {
+        languages_colors[language] = colorsData[language]?.color || "unknown";
+      });
+
+      console.log(languages_colors);
+      return languages_colors;
+   
+
 }
 
 export {getReposData, getLanguagesColor}
