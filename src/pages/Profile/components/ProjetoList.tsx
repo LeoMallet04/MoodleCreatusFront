@@ -79,7 +79,6 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                         {
                             withCredentials: true   
                         });
-                        console.log(newProject);
             
                         if (response.status === 201) {
                             const colors = await getLanguagesColor(gitDto.repo_languages);
@@ -96,29 +95,21 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                             setError(null);
                         }else{
                             setError("Erro ao adicionar o projeto. Tente novamente.");
+                            console.error(error);
                         }
                     }   
                     setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "", languages: [] });
-
-
-                    // const getProject = await axios.get("https://localhost:3000/project/1",   {
-                    //     withCredentials: true   
-                    // });
-
-                    // console.log(getProject.data);
-                    
-
-
                 }else{
                     setError("Preencha todos os campos corretamente.")
+                    console.error(error);
                 }
-            } catch (err: any) {
-                if (axios.isAxiosError(err)) {
-                    console.error("Erro:", err.response?.data?.message || "Erro desconhecido");
-                } else {
-                    console.error("Erro desconhecido.");
+                } catch (err: any) {
+                    if (axios.isAxiosError(err)) {
+                        console.error("Erro:", err.response?.data?.message || "Erro desconhecido");
+                    } else {
+                        console.error("Erro desconhecido.");
+                    }
                 }
-            }
             
         }
     
