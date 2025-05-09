@@ -40,47 +40,64 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
             user_email = "leonardoms.2010@hotmail.com";
             try {
                
-                var url = newProject.link.split("/");
-                var user = url[3];
-
-                const gitDto = await getReposData(user,newProject.title);
-                    if(!gitDto){
-                    alert("Certifique-se de inserir o nome do seu repositório no GitHub e o link para o repositório");
-                }
                 
                 //Checa se os valores do NewProject são valores que já foraminicializados
-                if(newProject.title && newProject.sprint && newProject.link && gitDto){
-                    newProject.description = gitDto.repo_description;
-                    newProject.languages = gitDto.repo_languages
-                    const response = await axios.post(API_URL,{
-                        link: newProject.link,
-                        title: newProject.title,
-                        description: newProject.description,
-                        sprint: newProject.sprint,
-                        user_email: user_email,
-                        languages: gitDto.repo_languages,
-                    },
-                    {
-                        withCredentials: true   
-                    });
-                    console.log(newProject);
-        
-                    if (response.status === 201) {
-                        const colors = await getLanguagesColor(gitDto.repo_languages);
+                if(newProject.title && newProject.sprint && newProject.link){
 
-                        const colorsDTO: LanguageColorsDTO = {
-                            languageColors: colors,
-                            projectId: gitDto.repo_name,
+
+                    for(const project of projects){
+                        if(project.title == newProject.title){
+                            alert("Já existe um projeto cadastrado com esse nome");   
+                            return; 
                         }
-
-                        setLanguagesColorsDTO(colorsDTO);
-                        localStorage.setItem(`language_colors_${gitDto.repo_name}`, JSON.stringify(colorsDTO));
-                        projects.push(newProject);
-                        setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "", languages: [] });
-                        setError(null);
-                    }else{
-                        setError("Erro ao adicionar o projeto. Tente novamente.");
+                        if(project.sprint == newProject.sprint){
+                            alert("Já existe um projeto cadastrado nessa sprint");
+                            return;
+                        }
                     }
+
+                    var url = newProject.link.split("/");
+                    var user = url[3];
+    
+                    const gitDto = await getReposData(user,newProject.title);
+                        if(!gitDto){
+                        alert("Certifique-se de inserir o nome do seu repositório no GitHub e o link para o repositório");
+                    }
+                    
+                    if(gitDto != null){
+                                
+                        newProject.description = gitDto.repo_description;
+                        newProject.languages = gitDto.repo_languages
+                        const response = await axios.post(API_URL,{
+                            link: newProject.link,
+                            title: newProject.title,
+                            description: newProject.description,
+                            sprint: newProject.sprint,
+                            user_email: user_email,
+                            languages: gitDto.repo_languages,
+                        },
+                        {
+                            withCredentials: true   
+                        });
+                        console.log(newProject);
+            
+                        if (response.status === 201) {
+                            const colors = await getLanguagesColor(gitDto.repo_languages);
+
+                            const colorsDTO: LanguageColorsDTO = {
+                                languageColors: colors,
+                                projectId: gitDto.repo_name,
+                            }
+
+                            setLanguagesColorsDTO(colorsDTO);
+                            localStorage.setItem(`language_colors_${gitDto.repo_name}`, JSON.stringify(colorsDTO));
+                            projects.push(newProject);
+                            setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "", languages: [] });
+                            setError(null);
+                        }else{
+                            setError("Erro ao adicionar o projeto. Tente novamente.");
+                        }
+                    }   
                     setNewProject({ title: "", sprint: 0, description: "", link: "", user_email: "", languages: [] });
 
 
@@ -223,12 +240,14 @@ function ProjetoList({ handleAccordionClick, showCards, user_email}: ProjetoList
                                 {project.link}
                             </Text>
 
+                            
                             <Flex flexDirection="row">
                             {project.languages.map((language, index) => (
                                 <LanguageBox key={index} language={language} colorsDTO={languagesColorsDTO ?? null} /> 
                                 ))}
 
                             </Flex>
+                           
                             
                         </Box>
                     ))}
