@@ -46,21 +46,21 @@ async function getReposData(user_name: string, repo_name: string): Promise<GitDT
 async function getLanguagesColor(languages: string[]): Promise<Record<string, string> | null> {
   const languages_colors: Record<string, string> = {};
 
-      const response_colors = await fetch('src/utils/colors.json');
-      
-      if (!response_colors.ok) {
-        return null;
-      }
+  const response_colors = await fetch('src/utils/colors.json');
+  
+  if (!response_colors.ok) {
+    return null;
+  }
 
-      const colorsData = await response_colors.json();
+  const colorsData = await response_colors.json();
 
-      languages.forEach((language) => {
-        languages_colors[language] = colorsData[language]?.color || "unknown";
-      });
+  languages.forEach((language) => {
+    languages_colors[language] = colorsData[language]?.color || "unknown";
+  });
 
-      console.log(languages_colors);
-      return languages_colors;
-   
+  console.log(languages_colors);
+  return languages_colors;
+
 
 }
 
